@@ -69,7 +69,13 @@ export default function SponsorsPage() {
         </div>
       </section>
 
-      <section className="bg-ink text-cream pb-20 sm:pb-28">
+      {/* Its own band, not a continuation of the dark section above it.
+          Three things do the separating, since the logos are white and the
+          section cannot go light: a background one step off --color-ink,
+          roughly 1.5x the vertical padding of its neighbours so it reads as a
+          pause, and full-bleed cream hairlines top and bottom. The heading
+          sits inside the band rather than floating above it. */}
+      <section className="bg-band text-cream border-y border-cream/20 py-24 sm:py-32">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal>
             <h2 className="font-display text-3xl sm:text-4xl uppercase text-center mb-12 sm:mb-16">

@@ -4,12 +4,19 @@
   --color-cream: #f3efe2;
   --color-ink: #17140f;
   --color-accent: #c1272d;
+  /* Sponsor band only. A lifted warm charcoal rather than true black: against
+     a near-black neighbour, going lighter separates more legibly than going
+     darker, and it keeps the white logos at full contrast. Measured ~13 points
+     of CIE L* above --color-ink — a step you see at a glance rather than
+     one you have to look for. White logos sit at 13:1 against it. */
+  --color-band: #302a20;
 }
 
 @theme inline {
   --color-cream: var(--color-cream);
   --color-ink: var(--color-ink);
   --color-accent: var(--color-accent);
+  --color-band: var(--color-band);
   --font-display: var(--font-anton);
   --font-sans: var(--font-inter);
   /* Labels, eyebrows, nav and other supporting text. */

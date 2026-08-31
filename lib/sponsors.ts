@@ -28,16 +28,64 @@ export type Sponsor = {
  *
  * Names are taken from each logo's own wordmark, not from a company registry.
  * They are display names, not verified legal entity names.
+ *
+ * Every url below was checked by resolving the domain and confirming the site
+ * belongs to that company — none were inferred from the company name. Where a
+ * domain could not be confirmed, the field stays empty and the logo renders
+ * unlinked, which is the intended fallback rather than a defect.
  */
 export const sponsors: Sponsor[] = [
-  { name: "Altair", logo: "/sponsors/altair.png", url: "", scale: 1.02 },
+  // VERIFY: altair.com 307-redirects to a Siemens corporate page — Altair was
+  // acquired by Siemens and no longer runs an independent site. The domain is
+  // right; where it lands may not be what the team wants. Clear the url to
+  // unlink it.
+  {
+    name: "Altair",
+    logo: "/sponsors/altair.png",
+    url: "https://www.altair.com",
+    scale: 1.02,
+  },
   // Stacked mark: object-contain fits it by height, which shrinks the wordmark
   // well below everything else. Needs the largest correction on the wall.
-  { name: "Amprius", logo: "/sponsors/amprius.png", url: "", scale: 1.2 },
-  { name: "Ansys", logo: "/sponsors/ansys.png", url: "", scale: 0.86 },
-  { name: "Boeing", logo: "/sponsors/boeing.png", url: "", scale: 1.05 },
-  { name: "Celsius", logo: "/sponsors/celsius.png", url: "", scale: 1.02 },
-  { name: "Kenesto", logo: "/sponsors/kenesto.png", url: "", scale: 0.98 },
+  {
+    name: "Amprius",
+    logo: "/sponsors/amprius.png",
+    url: "https://amprius.com",
+    scale: 1.2,
+  },
+  // VERIFY: ansys.com 301-redirects to ansys.synopsys.com — Synopsys completed
+  // its acquisition of Ansys in July 2025. Same call as Altair above.
+  {
+    name: "Ansys",
+    logo: "/sponsors/ansys.png",
+    url: "https://www.ansys.com",
+    scale: 0.86,
+  },
+  {
+    name: "Boeing",
+    logo: "/sponsors/boeing.png",
+    url: "https://www.boeing.com",
+    scale: 1.05,
+  },
+  {
+    name: "Celsius",
+    logo: "/sponsors/celsius.png",
+    url: "https://www.celsius.com",
+    scale: 1.02,
+  },
+  {
+    name: "Kenesto",
+    logo: "/sponsors/kenesto.png",
+    url: "https://kenesto.com",
+    scale: 0.98,
+  },
   // Widest mark at 6.7:1, so it is width-limited and reads heavy at 1.
-  { name: "Mitsuba", logo: "/sponsors/mitsuba.png", url: "", scale: 0.92 },
+  // Corporate root serves Japanese; there is an English section but linking it
+  // would be a deep link.
+  {
+    name: "Mitsuba",
+    logo: "/sponsors/mitsuba.png",
+    url: "https://www.mitsuba.co.jp",
+    scale: 0.92,
+  },
 ];
