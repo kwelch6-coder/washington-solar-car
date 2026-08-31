@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/ScrollReveal";
 import TeamCard from "@/components/TeamCard";
@@ -12,7 +11,7 @@ import {
   subTeams,
 } from "@/lib/data";
 import { photos } from "@/lib/photos";
-import { TEAM_NAME } from "@/lib/site";
+import { TEAM_NAME, external, links } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Team",
@@ -65,8 +64,19 @@ export default function TeamPage() {
               </Reveal>
             ))}
           </div>
+          {/* Keyed to (hover: hover) rather than a width breakpoint, so a
+              touch laptop is told to tap and a narrow desktop window is still
+              told to hover. Each phrase is written out in full so only one
+              ever reaches the accessibility tree — the other is display:none.
+              Tap is the default, covering (hover: none) and anything the
+              browser can't answer for. */}
           <p className="text-center font-label font-light text-cream/50 text-sm mt-4">
-            Tap or hover a card for more.
+            <span className="[@media(hover:hover)]:hidden">
+              Tap a card for more information
+            </span>
+            <span className="hidden [@media(hover:hover)]:inline">
+              Hover a card for more information
+            </span>
           </p>
         </div>
       </section>
@@ -99,13 +109,6 @@ export default function TeamPage() {
               <p className="text-lg text-ink/85">{joining.firstQuarter}</p>
             </Reveal>
           </div>
-          <Reveal>
-            {/* Recruiting timeline, application process and deadlines are
-                undecided. Placeholder rather than an invented date. */}
-            <p className="mt-10 border border-dashed border-ink/40 text-ink/60 px-4 py-3 text-sm max-w-xl mx-auto text-center">
-              [recruiting timeline &amp; application process — add once decided]
-            </p>
-          </Reveal>
         </div>
       </section>
 
@@ -179,12 +182,13 @@ export default function TeamPage() {
             Engineers, designers, writers, photographers and business students,
             roughly fifty of them, one car.
           </p>
-          <Link
-            href="/contact"
+          <a
+            href={links.apply}
+            {...external}
             className="inline-block bg-ink text-cream font-label uppercase tracking-[0.14em] text-sm px-7 py-3 hover:bg-cream hover:text-ink transition-colors"
           >
             Join the Team
-          </Link>
+          </a>
         </Reveal>
       </section>
     </>

@@ -212,8 +212,7 @@ export const leadership: LeadershipMember[] = [
   { name: "Grant Gallagher", role: "Mechanical Lead" },
   { name: "Nikhil Garg", role: "Electrical Lead" },
   { name: "Owen Kuwayti", role: "Battery Lead & Admin Lead" },
-  { name: "TBD", role: "Business Lead", tbd: true },
-  { name: "TBD", role: "Project Manager", tbd: true },
+  { name: "Izzy Lavoie", role: "Business Lead" },
 ];
 
 export const cars = {

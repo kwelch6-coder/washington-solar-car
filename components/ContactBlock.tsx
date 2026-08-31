@@ -1,4 +1,5 @@
 import { contact } from "@/lib/data";
+import { external, links } from "@/lib/site";
 
 export default function ContactBlock() {
   return (
@@ -12,13 +13,22 @@ export default function ContactBlock() {
           Start here.
         </p>
 
-        <div className="mt-10 grid sm:grid-cols-2 gap-4 max-w-lg mx-auto text-left">
-          <p className="border border-dashed border-cream/40 text-cream/60 px-4 py-3 text-sm">
-            [team email — add real address]
-          </p>
-          <p className="border border-dashed border-cream/40 text-cream/60 px-4 py-3 text-sm">
-            [social handles — Instagram / LinkedIn]
-          </p>
+        <div className="mt-10 grid sm:grid-cols-2 gap-4 max-w-lg mx-auto">
+          {/* The address is the link text, so it survives being read aloud or
+              copied by anyone without a mail client wired up. */}
+          <a
+            href={`mailto:${links.email}`}
+            className="border border-cream/40 px-4 py-3 text-sm hover:bg-cream hover:text-ink transition-colors"
+          >
+            {links.email}
+          </a>
+          <a
+            href={links.instagram}
+            {...external}
+            className="border border-cream/40 px-4 py-3 text-sm hover:bg-cream hover:text-ink transition-colors"
+          >
+            Instagram
+          </a>
         </div>
 
         <div className="mt-10 font-label uppercase tracking-[0.16em] text-sm text-accent">

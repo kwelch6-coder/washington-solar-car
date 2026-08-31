@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import SunIcon from "./SunIcon";
 import { claimIntro, endIntro, useIsomorphicLayoutEffect } from "@/lib/intro";
-import { TEAM_NAME } from "@/lib/site";
+import { TEAM_NAME, external, links } from "@/lib/site";
 
 const LINKS = [
   { href: "/about", label: "About" },
@@ -196,14 +196,17 @@ export default function Nav() {
           })}
         </nav>
 
-        <Link
-          href="/contact"
+        {/* Straight to the application form, so a plain <a> rather than a
+            next/link route. */}
+        <a
+          href={links.apply}
+          {...external}
           className={`hidden lg:inline-block whitespace-nowrap bg-accent text-cream font-label uppercase tracking-[0.14em] px-5 py-2 text-xs transition-colors ${
             overHero ? "hover:bg-cream hover:text-ink" : "hover:bg-ink"
           }`}
         >
           Join the Team
-        </Link>
+        </a>
 
         <button
           type="button"

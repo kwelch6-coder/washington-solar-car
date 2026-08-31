@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { TEAM_NAME, UNIVERSITY } from "@/lib/site";
+import { TEAM_NAME, UNIVERSITY, external, links } from "@/lib/site";
 
 const LINKS = [
   { href: "/about", label: "About" },
@@ -46,11 +46,21 @@ export default function Footer() {
           <h2 className="font-label uppercase tracking-[0.2em] text-xs text-accent mb-3">
             Reach Us
           </h2>
-          <p className="border border-dashed border-cream/40 text-cream/60 px-3 py-2 mb-2 text-sm">
-            [team email — add real address]
+          {/* Address shown in full rather than behind an "Email us" label, so
+              it can be copied when no mail client is configured. */}
+          <p className="mb-2">
+            <a href={`mailto:${links.email}`} className="hover:text-accent transition-colors">
+              {links.email}
+            </a>
           </p>
-          <p className="border border-dashed border-cream/40 text-cream/60 px-3 py-2 mb-2 text-sm">
-            [social handles — add Instagram / LinkedIn]
+          <p className="mb-4">
+            <a
+              href={links.instagram}
+              {...external}
+              className="hover:text-accent transition-colors"
+            >
+              Instagram
+            </a>
           </p>
           <p className="text-cream/70 text-sm">
             The 8 Makerspace, McMahon Hall

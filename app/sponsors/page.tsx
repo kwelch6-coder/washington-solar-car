@@ -3,10 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/ScrollReveal";
-import RacingGrid from "@/components/RacingGrid/RacingGrid";
 import { sponsors } from "@/lib/data";
 import { photos } from "@/lib/photos";
-import { TEAM_NAME } from "@/lib/site";
+import { TEAM_NAME, external, links } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Sponsors",
@@ -49,12 +48,6 @@ export default function SponsorsPage() {
         </div>
       </section>
 
-      {/* Full-bleed signature moment. A plain fade only — the grid animates its
-          own cars on open, and a slide-in would fight that. */}
-      <Reveal direction="none">
-        <RacingGrid />
-      </Reveal>
-
       <section className="bg-ink text-cream py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-5 sm:px-8 text-center">
           <Reveal>
@@ -65,17 +58,18 @@ export default function SponsorsPage() {
             <p className="mt-6 text-lg text-cream/85">{sponsors.bestStory}</p>
           </Reveal>
           <Reveal>
-            {/* Donation currently routes through several live paths and the
-                team intends to consolidate to one. No link ships until that
-                single confirmed URL and its tax language arrive. */}
-            <div className="mt-10 grid sm:grid-cols-2 gap-4 text-left">
-              <p className="border border-dashed border-cream/40 text-cream/60 px-4 py-3 text-sm">
-                [donation link — add the single confirmed URL]
-              </p>
-              <p className="border border-dashed border-cream/40 text-cream/60 px-4 py-3 text-sm">
-                [tax-deductibility language — add once confirmed]
-              </p>
-            </div>
+            {/* The single donation destination. Nothing else on the site links
+                anywhere else to give. */}
+            <a
+              href={links.donate}
+              {...external}
+              className="mt-10 inline-block bg-accent text-cream font-label uppercase tracking-[0.14em] text-sm px-7 py-3 hover:bg-cream hover:text-ink transition-colors"
+            >
+              Donate
+            </a>
+            <p className="mt-6 mx-auto max-w-sm border border-dashed border-cream/40 text-cream/60 px-4 py-3 text-sm">
+              [tax-deductibility language — add once confirmed]
+            </p>
           </Reveal>
         </div>
       </section>
@@ -89,8 +83,13 @@ export default function SponsorsPage() {
             Reach out and we&apos;ll walk you through tiers, timelines, and
             what it looks like on the livery.
           </p>
-          <p className="mx-auto mb-8 max-w-sm border border-dashed border-cream/50 text-cream/80 px-4 py-3 text-sm">
-            [sponsorship contact email — add real address]
+          <p className="mb-8">
+            <a
+              href={`mailto:${links.email}`}
+              className="underline underline-offset-4 hover:text-ink transition-colors"
+            >
+              {links.email}
+            </a>
           </p>
           <Link
             href="/contact"
