@@ -33,10 +33,6 @@ export const metadata: Metadata = {
   icons: {
     icon: "/main-logo-black.png",
   },
-  // DRAFT STATE. Final copy is awaiting sign-off from team leadership, and
-  // several figures on the Sponsors and Team pages are still marked TODO.
-  // Delete this `robots` block to publish — that is the only switch.
-  robots: { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
