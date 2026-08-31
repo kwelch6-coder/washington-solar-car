@@ -30,9 +30,6 @@ export const metadata: Metadata = {
     template: `%s — ${TEAM_NAME}`,
   },
   description: `${TEAM_NAME} is a student team at the ${UNIVERSITY} that designs, builds, and races a solar car. In 2026 we finished 4th in the SOV class at the American Solar Challenge, the top American team in the class.`,
-  icons: {
-    icon: "/main-logo-black.png",
-  },
 };
 
 export const viewport: Viewport = {
