@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+:root {
+  --color-cream: #f3efe2;
+  --color-ink: #17140f;
+  --color-accent: #c1272d;
+}
+
+@theme inline {
+  --color-cream: var(--color-cream);
+  --color-ink: var(--color-ink);
+  --color-accent: var(--color-accent);
+  --font-display: var(--font-anton);
+  --font-sans: var(--font-inter);
+  /* Labels, eyebrows, nav and other supporting text. */
+  --font-label: var(--font-poppins);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-cream);
+}
+
+/* No background here: an in-flow block background paints above negative
+   z-index descendants, which would hide the nav's top-of-page backdrop strip.
+   The cream canvas comes from `html` above. */
+body {
+  color: var(--color-ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--color-ink);
+  color: transparent;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

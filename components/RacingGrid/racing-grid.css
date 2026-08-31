@@ -1,0 +1,522 @@
+/* ==========================================================================
+   Racing grid tier section — Sponsors page
+   Inherits the site's tokens and typefaces. The only new variables here are
+   the per-tier car colours and their trail mixes; the near-black and cream
+   come straight from the site palette (--color-ink / --color-cream).
+   Hard edges throughout — zero border radius anywhere in this section.
+   ========================================================================== */
+
+.rg-root {
+  /* Five of six tiers are named after a colour, so each car is the colour it
+     is named. Title takes the site red; White takes the site cream; Black is
+     the section background itself and is picked out by a hairline instead. */
+  --tier-title: var(--color-accent);
+  --tier-purple: #4b2e83;
+  --tier-gold: #e5c77a;
+  --tier-white: var(--color-cream);
+  --tier-black: var(--color-ink);
+  --tier-bronze: #a9713b;
+
+  /* Grid geometry. The start line sits at --start-x of the section width; the
+     same value resolves as cqw inside each lane, so line and cars agree. */
+  --start-x: 6%;
+  --lane-start-x: 6cqw;
+  --travel-x: 70cqw;
+  --stagger: 40px;
+  --lane-h: 104px;
+  --car-w: 160px;
+  --trail-inset: 8px;
+
+  /* Trail = tier colour mixed with cream. NOT the car colour at low opacity —
+     that leaves it too dark for ink text to read against. Tuned per tier, each
+     measured against --color-ink rather than sharing one percentage:
+       title   68% -> #d87166   5.67:1
+       purple  52% -> #9689b3   5.72:1
+       gold    92% -> #e6ca83  11.52:1
+       white  100% -> #f3efe2  15.97:1   (already cream; needs none)
+       black   42% -> #8f8b82   5.34:1   (50% drops to 4.16 and fails)
+       bronze  76% -> #bc8f64   6.31:1
+     Black and Purple start darkest and so take the most cream. */
+  --trail-title: color-mix(in oklab, var(--tier-title) 68%, var(--color-cream));
+  --trail-purple: color-mix(in oklab, var(--tier-purple) 52%, var(--color-cream));
+  --trail-gold: color-mix(in oklab, var(--tier-gold) 92%, var(--color-cream));
+  --trail-white: color-mix(in oklab, var(--tier-white) 100%, var(--color-cream));
+  --trail-black: color-mix(in oklab, var(--tier-black) 42%, var(--color-cream));
+  --trail-bronze: color-mix(in oklab, var(--tier-bronze) 76%, var(--color-cream));
+
+  position: relative;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-label), ui-sans-serif, system-ui, sans-serif;
+  overflow: hidden;
+  padding-block: 64px;
+}
+
+.rg-head {
+  padding-inline: 20px;
+  margin-bottom: 40px;
+}
+
+.rg-heading {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: var(--color-cream);
+  margin: 0;
+}
+
+.rg-util {
+  font-family: var(--font-label), ui-sans-serif, system-ui, sans-serif;
+  /* Poppins is loaded at 300/400 only — no 500 to synthesize. */
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rg-grid {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rg-lane {
+  position: relative;
+  container-type: inline-size;
+  --lane-start-x: 6cqw;
+}
+
+.rg-lane[data-tier="title"] {
+  --tier: var(--tier-title);
+  --trail: var(--trail-title);
+}
+.rg-lane[data-tier="purple"] {
+  --tier: var(--tier-purple);
+  --trail: var(--trail-purple);
+}
+.rg-lane[data-tier="gold"] {
+  --tier: var(--tier-gold);
+  --trail: var(--trail-gold);
+}
+.rg-lane[data-tier="white"] {
+  --tier: var(--tier-white);
+  --trail: var(--trail-white);
+}
+.rg-lane[data-tier="black"] {
+  --tier: var(--tier-black);
+  --trail: var(--trail-black);
+}
+.rg-lane[data-tier="bronze"] {
+  --tier: var(--tier-bronze);
+  --trail: var(--trail-bronze);
+}
+
+/* A genuinely black car on a near-black section would vanish. Rather than
+   lightening the fill, pick the silhouette out with a cream hairline. SVG
+   `stroke` inherits, so the body shape picks this up without knowing about it —
+   which also holds once the real car-top.svg replaces the placeholder. */
+.rg-lane[data-tier="black"] .rg-car {
+  stroke: var(--color-cream);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Even lanes start forward of the line, like a real Le Mans grid. */
+.rg-lane[data-stagger="true"] {
+  --lane-start-x: calc(6cqw + var(--stagger));
+}
+
+.rg-lane + .rg-lane {
+  border-top: 1px dashed color-mix(in srgb, var(--color-cream) 20%, transparent);
+}
+
+.rg-foot {
+  padding-inline: 20px;
+  margin-top: 28px;
+  color: color-mix(in srgb, var(--color-cream) 70%, transparent);
+}
+
+/* Reads as scaffolding, not as copy. Same dashed convention as the [email]
+   and [donation link] placeholders elsewhere on the site. */
+.rg-draft {
+  display: block;
+  width: fit-content;
+  padding: 8px 14px;
+  border: 1px dashed color-mix(in srgb, var(--color-cream) 40%, transparent);
+  color: color-mix(in srgb, var(--color-cream) 60%, transparent);
+}
+
+/* --- Fallback: no JS / pre-hydration --------------------------------------
+   Every tier open and stacked as plain readable blocks. The racing layout
+   below only engages once html.rg-js is set, which happens after mount. */
+
+.rg-trail,
+.rg-startline,
+.rg-startseg,
+.rg-skids {
+  display: none;
+}
+
+.rg-panel {
+  background: var(--trail);
+  color: var(--color-ink);
+  padding: 20px;
+}
+
+.rg-btn {
+  display: block;
+  width: 100%;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 12px 20px;
+  background: none;
+  border: 0;
+  color: var(--tier);
+  cursor: pointer;
+  text-align: left;
+}
+
+.rg-car {
+  display: block;
+  width: var(--car-w);
+  max-width: 100%;
+  height: auto;
+}
+
+.rg-amount {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 0.85;
+  /* Sized so a five-line tier still clears the 104px lane once the TODO
+     benefits are filled in — see the fit check in the summary. */
+  font-size: 2.5rem;
+}
+
+.rg-name {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
+.rg-benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rg-benefits li {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.rg-btn:focus-visible {
+  outline: 3px solid var(--color-cream);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Enhanced racing layout — JS on, >=768px
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  :root.rg-js .rg-head,
+  :root.rg-js .rg-foot {
+    padding-inline: var(--start-x);
+  }
+
+  :root.rg-js .rg-startline {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--start-x);
+    width: 2px;
+    background: color-mix(in srgb, var(--color-cream) 55%, transparent);
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  :root.rg-js .rg-lane {
+    height: var(--lane-h);
+  }
+
+  :root.rg-js .rg-track {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Per-lane segment sitting on top of the global line, brightened on hover. */
+  :root.rg-js .rg-startseg {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--start-x);
+    width: 2px;
+    background: transparent;
+    transition: background 200ms ease;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Swept path: a static block from this lane's own car start to its rest x.
+     Anchoring the trail to the car's start (not to the start line) is what
+     locks the revealed leading edge to the rear bumper — car and clip cover
+     the identical distance on the identical curve, so they cannot drift. */
+  :root.rg-js .rg-trail {
+    display: block;
+    position: absolute;
+    top: var(--trail-inset);
+    bottom: var(--trail-inset);
+    left: var(--lane-start-x);
+    width: calc(var(--travel-x) - var(--lane-start-x));
+    background: var(--trail);
+    clip-path: inset(0 100% 0 0);
+    z-index: 1;
+    /* Closing: hold 150ms so the text clears before the trail collapses. */
+    transition: clip-path 600ms cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+  }
+
+  :root.rg-js .rg-lane[data-open="true"] .rg-trail {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 900ms cubic-bezier(0.22, 1, 0.36, 1)
+      var(--open-delay, 0ms);
+  }
+
+  :root.rg-js .rg-panelwrap {
+    position: absolute;
+    top: var(--trail-inset);
+    bottom: var(--trail-inset);
+    left: var(--lane-start-x);
+    width: calc(var(--travel-x) - var(--lane-start-x));
+    z-index: 2;
+    pointer-events: none;
+    display: block;
+  }
+
+  :root.rg-js .rg-panel {
+    height: 100%;
+    background: transparent;
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 0 28px;
+    overflow: hidden;
+  }
+
+  :root.rg-js .rg-btn {
+    position: absolute;
+    top: 50%;
+    left: var(--lane-start-x);
+    width: var(--car-w);
+    padding: 0;
+    transform: translate(0, -50%);
+    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+    z-index: 3;
+  }
+
+  :root.rg-js .rg-lane[data-open="true"] .rg-btn {
+    transform: translate(calc(var(--travel-x) - var(--lane-start-x)), -50%);
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1)
+      var(--open-delay, 0ms);
+  }
+
+  /* Hover, desktop pointers only: a 6px nudge and a brighter start segment.
+     No trail preview. */
+  @media (hover: hover) {
+    :root.rg-js .rg-lane:not([data-open="true"]) .rg-btn:hover {
+      transform: translate(6px, -50%);
+      transition: transform 200ms ease-out;
+    }
+    :root.rg-js .rg-btn:hover ~ .rg-startseg {
+      background: var(--color-cream);
+    }
+  }
+
+  :root.rg-js .rg-car {
+    width: 100%;
+  }
+
+  /* Text reveal inside the open trail. */
+  :root.rg-js .rg-panel .rg-reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 150ms ease, transform 150ms ease;
+  }
+
+  :root.rg-js .rg-lane[data-open="true"] .rg-panel .rg-reveal {
+    opacity: 1;
+    transform: none;
+    transition: opacity 400ms ease-out, transform 400ms ease-out;
+    transition-delay: calc(
+      350ms + var(--open-delay, 0ms) + (var(--i, 0) * 60ms)
+    );
+  }
+
+  /* Persistent skid marks: left behind once a lane has been opened. */
+  :root.rg-js .rg-lane[data-visited="true"] .rg-skids {
+    display: block;
+    position: absolute;
+    left: calc(var(--lane-start-x) + 8px);
+    top: 50%;
+    width: 60px;
+    height: 44px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  :root.rg-js .rg-skids::before,
+  :root.rg-js .rg-skids::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: rgb(0 0 0 / 0.25);
+  }
+  :root.rg-js .rg-skids::before {
+    top: 6px;
+  }
+  :root.rg-js .rg-skids::after {
+    bottom: 6px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .rg-root {
+    --travel-x: 55cqw;
+    --lane-h: 92px;
+    --car-w: 132px;
+  }
+  .rg-amount {
+    font-size: 1.875rem;
+  }
+  .rg-benefits li {
+    font-size: 0.6875rem;
+  }
+}
+
+/* ==========================================================================
+   Enhanced accordion — JS on, <768px
+   The horizontal metaphor stops working here: not enough width for a trail
+   and readable text. Cars travel a short distance and the content expands
+   below the lane, keeping the trail colour so the visual logic survives.
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  .rg-root {
+    --travel-x: 30cqw;
+    --lane-h: 96px;
+    --car-w: 140px;
+  }
+
+  :root.rg-js .rg-track {
+    position: relative;
+    height: var(--lane-h);
+  }
+
+  /* Per-lane rather than one line down the whole grid: the expanded panel sits
+     in flow between lanes, and a continuous line would run through it. */
+  :root.rg-js .rg-startseg {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--start-x);
+    width: 2px;
+    background: color-mix(in srgb, var(--color-cream) 55%, transparent);
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  :root.rg-js .rg-panel {
+    padding-inline: calc(var(--start-x) + 8px) 20px;
+  }
+
+  :root.rg-js .rg-btn {
+    position: absolute;
+    top: 50%;
+    left: var(--lane-start-x);
+    width: var(--car-w);
+    min-height: 44px;
+    padding: 0;
+    transform: translate(0, -50%);
+    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 3;
+  }
+
+  :root.rg-js .rg-lane[data-open="true"] .rg-btn {
+    transform: translate(calc(var(--travel-x) - var(--lane-start-x)), -50%);
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1)
+      var(--open-delay, 0ms);
+  }
+
+  :root.rg-js .rg-panelwrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 400ms ease-out;
+  }
+
+  :root.rg-js .rg-lane[data-open="true"] .rg-panelwrap {
+    grid-template-rows: 1fr;
+  }
+
+  :root.rg-js .rg-panel {
+    overflow: hidden;
+    min-height: 0;
+    background: var(--trail);
+    color: var(--color-ink);
+    padding-block: 0;
+  }
+
+  :root.rg-js .rg-lane[data-open="true"] .rg-panel {
+    padding-block: 20px;
+    transition: padding-block 400ms ease-out;
+  }
+
+  .rg-amount {
+    font-size: 2rem;
+  }
+  .rg-benefits li {
+    font-size: 0.75rem;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion: no travel, no wipe. Trail and text cross-fade instead.
+   Colour logic is unchanged.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  :root.rg-js .rg-btn,
+  :root.rg-js .rg-lane[data-open="true"] .rg-btn {
+    transform: translate(0, -50%) !important;
+    transition: none !important;
+  }
+
+  :root.rg-js .rg-trail {
+    clip-path: none !important;
+    opacity: 0;
+    transition: opacity 150ms ease !important;
+  }
+  :root.rg-js .rg-lane[data-open="true"] .rg-trail {
+    opacity: 1;
+  }
+
+  :root.rg-js .rg-panel .rg-reveal,
+  :root.rg-js .rg-lane[data-open="true"] .rg-panel .rg-reveal {
+    transform: none !important;
+    transition: opacity 150ms ease !important;
+    transition-delay: 0ms !important;
+  }
+
+  :root.rg-js .rg-panelwrap {
+    transition: none !important;
+  }
+}
