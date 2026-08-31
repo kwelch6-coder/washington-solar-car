@@ -13,7 +13,7 @@ export default function ContactBlock() {
           Start here.
         </p>
 
-        <div className="mt-10 grid sm:grid-cols-2 gap-4 max-w-lg mx-auto">
+        <div className="mt-10 grid sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
           {/* The address is the link text, so it survives being read aloud or
               copied by anyone without a mail client wired up. */}
           <a
@@ -28,6 +28,13 @@ export default function ContactBlock() {
             className="border border-cream/40 px-4 py-3 text-sm hover:bg-cream hover:text-ink transition-colors"
           >
             Instagram
+          </a>
+          <a
+            href={links.linkedin}
+            {...external}
+            className="border border-cream/40 px-4 py-3 text-sm hover:bg-cream hover:text-ink transition-colors"
+          >
+            LinkedIn
           </a>
         </div>
 

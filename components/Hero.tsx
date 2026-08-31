@@ -5,7 +5,7 @@ import gsap from "gsap";
 import HeroCarousel from "./HeroCarousel";
 import type { HeroSlide } from "@/lib/data";
 import { claimIntro, useIsomorphicLayoutEffect } from "@/lib/intro";
-import { TAGLINE, TEAM_NAME, UNIVERSITY } from "@/lib/site";
+import { TEAM_NAME, UNIVERSITY } from "@/lib/site";
 
 export default function Hero({ slides }: { slides: HeroSlide[] }) {
   const textRef = useRef<HTMLDivElement>(null);
@@ -53,12 +53,6 @@ export default function Hero({ slides }: { slides: HeroSlide[] }) {
         }
         className="relative z-20 px-5 sm:px-8 pt-12 sm:pt-16 pb-0 text-center mb-[calc(var(--hero-title)*-0.34)] max-[470px]:mb-[calc(var(--hero-title)*-0.39)] pointer-events-none"
       >
-        {/* The team's positioning line opens the page, above the lockup. Set
-            as a sentence rather than a second eyebrow so the two small lines
-            above the title stay clearly distinct from one another. */}
-        <p className="font-label font-light text-sm sm:text-base text-cream/85 mb-5 sm:mb-7">
-          {TAGLINE}
-        </p>
         <p className="font-label font-light text-xs sm:text-sm uppercase tracking-[0.35em] text-cream/70 mb-2 lg:mb-4">
           {UNIVERSITY}
         </p>

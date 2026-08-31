@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { TEAM_NAME, UNIVERSITY, external, links } from "@/lib/site";
+import { TAGLINE, TEAM_NAME, UNIVERSITY, external, links } from "@/lib/site";
 
 const LINKS = [
   { href: "/about", label: "About" },
@@ -53,7 +53,10 @@ export default function Footer() {
               {links.email}
             </a>
           </p>
-          <p className="mb-4">
+          {/* Two separate links, matching each other and the email above in
+              size, style and spacing. Deliberately not merged into one
+              "social" link. */}
+          <p className="mb-2">
             <a
               href={links.instagram}
               {...external}
@@ -62,12 +65,29 @@ export default function Footer() {
               Instagram
             </a>
           </p>
+          <p className="mb-4">
+            <a
+              href={links.linkedin}
+              {...external}
+              className="hover:text-accent transition-colors"
+            >
+              LinkedIn
+            </a>
+          </p>
           <p className="text-cream/70 text-sm">
             The 8 Makerspace, McMahon Hall
             <br />
             {UNIVERSITY}, Seattle
           </p>
         </div>
+      </div>
+
+      {/* The site's closing line, on every page. Display face for presence,
+          held below the 3xl/4xl page headings so it never competes with them. */}
+      <div className="border-t border-cream/20 px-5 sm:px-8 py-8 sm:py-10">
+        <p className="mx-auto max-w-7xl font-display uppercase leading-[1.05] text-cream text-xl sm:text-2xl lg:text-3xl">
+          {TAGLINE}
+        </p>
       </div>
 
       <div className="border-t border-cream/20 text-cream/50 text-xs px-5 sm:px-8 py-4 flex flex-col sm:flex-row justify-between gap-2">

@@ -20,19 +20,28 @@ export const TAGLINE = `${TEAM_NAME} turns sun into speed, and students into lea
 /**
  * Every outbound destination the site links to. One place to swap them.
  *
- * `apply` currently points at Google's `/closedform` URL — the form is not
- * accepting responses. When recruiting reopens the same form, the live path is
- * `/viewform`; changing the suffix here updates every Join the Team call to
- * action at once.
+ * The single all-subteams application form that used to live here is gone:
+ * applying is now per-subteam, and every Join the Team call to action points
+ * at the internal APPLY_PATH page instead, which is where these two forms are
+ * offered. Business has no form yet — see `subTeams` in lib/data.ts.
  */
 export const links = {
   instagram: "https://www.instagram.com/solarvehicleteamuw/",
+  linkedin: "https://www.linkedin.com/company/solarvehicleteamuw",
   email: "svtuw@uw.edu",
   donate:
     "https://www.zeffy.com/en-US/donation-form/help-us-race-at-american-solar-car-challenge",
-  apply:
-    "https://docs.google.com/forms/d/e/1FAIpQLSem-i-Lbalqol25wIHA7YWzH4BR9YGDG0njnOvqwfMjum2qNQ/closedform",
+  applyMechanical:
+    "https://docs.google.com/forms/d/e/1FAIpQLSfsKaRukCikBrVyzfyoqAhPPVOX5_9A22e8znTZsHQTLaHAGw/viewform",
+  applyElectrical:
+    "https://docs.google.com/forms/d/e/1FAIpQLSecw4pRc5Wo8qW7J2uXjCOhWAibaRlqh96-dxAe86HpLJdnvQ/viewform",
 } as const;
+
+/**
+ * The internal apply page. Deliberately absent from the nav list — the Join
+ * the Team button is its only nav-level entry point.
+ */
+export const APPLY_PATH = "/apply";
 
 /** Spread onto any anchor leaving the site. */
 export const external = {

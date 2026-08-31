@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import SunIcon from "./SunIcon";
 import { claimIntro, endIntro, useIsomorphicLayoutEffect } from "@/lib/intro";
-import { TEAM_NAME, external, links } from "@/lib/site";
+import { APPLY_PATH, TEAM_NAME, external, links } from "@/lib/site";
 
 const LINKS = [
   { href: "/about", label: "About" },
@@ -127,6 +127,13 @@ export default function Nav() {
   // outright would shrink the bar by 2px on the colour swap and jog the sticky
   // offset. Transparent leaves no seam and no height change.
 
+  // Both CTAs share this verbatim so they read as one matched pair. The steps
+  // exist so they shrink together on narrow bars instead of either one being
+  // dropped into the hamburger menu.
+  const ctaClass = `whitespace-nowrap bg-accent text-cream font-label uppercase transition-colors text-[10px] tracking-[0.03em] px-1.5 py-1.5 sm:text-xs sm:tracking-[0.14em] sm:px-4 sm:py-2 lg:px-5 ${
+    overHero ? "hover:bg-cream hover:text-ink" : "hover:bg-ink"
+  }`;
+
   return (
     <>
       {/* Fills the header's own flow box at the very top of the document. When
@@ -161,7 +168,7 @@ export default function Nav() {
     >
       <div
         ref={barRef}
-        className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8"
+        className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-5 py-3 sm:px-8"
       >
         <Link href="/" className="flex items-center gap-2" aria-label={`${TEAM_NAME} home`}>
           <Image
@@ -169,7 +176,7 @@ export default function Nav() {
             alt={`${TEAM_NAME} logo`}
             width={160}
             height={44}
-            className="h-8 w-auto sm:h-9"
+            className="h-7 w-auto max-[359px]:h-6 sm:h-9"
             priority
           />
         </Link>
@@ -196,27 +203,29 @@ export default function Nav() {
           })}
         </nav>
 
-        {/* Straight to the application form, so a plain <a> rather than a
-            next/link route. */}
-        <a
-          href={links.apply}
-          {...external}
-          className={`hidden lg:inline-block whitespace-nowrap bg-accent text-cream font-label uppercase tracking-[0.14em] px-5 py-2 text-xs transition-colors ${
-            overHero ? "hover:bg-cream hover:text-ink" : "hover:bg-ink"
-          }`}
-        >
-          Join the Team
-        </a>
+        {/* The site's two conversion actions. Identical classes on both so
+            they read as a matched pair, and both stay in the bar at every
+            width — they shrink together rather than one hiding in the menu,
+            which is why the type and padding step up rather than the buttons
+            being gated behind `hidden lg:inline-block`. */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5">
+          <a href={links.donate} {...external} className={ctaClass}>
+            Donate
+          </a>
+          <Link href={APPLY_PATH} className={ctaClass}>
+            Join the Team
+          </Link>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="lg:hidden p-3 -mr-1"
-        >
-          <SunIcon open={open} />
-        </button>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="lg:hidden p-1.5 sm:p-2 -mr-1 shrink-0"
+          >
+            <SunIcon open={open} />
+          </button>
+        </div>
       </div>
 
       {open && (

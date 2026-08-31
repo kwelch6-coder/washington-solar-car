@@ -113,18 +113,119 @@ export const about = {
     "Looking ahead, we hope to build a lasting legacy, a foundation strong enough to give generations of students after us the same hands-on experiences and learning opportunities that shaped us. As we grow, learn, and sharpen our craft, our sights are set on preparing to race at the Bridgestone World Solar Challenge in Australia, the most demanding solar race. Until then, we will continue to master the American Solar Challenge and the Formula Sun Grand Prix, treating every competition as a chance to push our engineering further, develop stronger engineers, and lay the groundwork for the team that shows up in Australia.",
 };
 
+export type SubTeamProject = { name: string; description: string };
+
 /**
  * Three subteams, not four. Telemetry & Strategy and Business & Outreach were
  * never separate teams.
  *
- * TODO: one-line description of what each subteam owns, plus headcount per
- * subteam. Cards render name-only until those arrive.
+ * `projects` drives the expanding panel on the Team page. A subteam with no
+ * projects renders as a plain card that does not open — which is Business's
+ * current state, deliberately, until its content is supplied.
+ *
+ * The source material listed a number of open positions per project. Those are
+ * omitted on purpose and must not be reintroduced: headcounts go stale the
+ * moment someone joins, and a stale number on a recruiting page reads as a
+ * closed door.
  */
-export type SubTeam = { name: string; description?: string };
+export type SubTeam = {
+  name: string;
+  description?: string;
+  projects?: SubTeamProject[];
+  /** Sits apart from the project list, closing the panel. */
+  closing?: string;
+};
 
 export const subTeams: SubTeam[] = [
-  { name: "Mechanical" },
-  { name: "Electrical" },
+  {
+    name: "Mechanical",
+    projects: [
+      {
+        name: "Aeroshell",
+        description:
+          "Due to the nature of being a solar-powered car, efficiency is a top priority, and with that comes aerodynamics. The aeroshell is the outer surface and body of the car that is designed to package the car to be as aerodynamic as possible. Designing this part will require CFD optimization, surface modeling, and possibly composites work.",
+      },
+      {
+        name: "Chassis",
+        description:
+          "The chassis is the backbone of the car. In the past, we have built our chassis out of carbon fiber sandwich panels, and we have been looking into doing more complex carbon fiber layups and such. This project will dive deep into composites, working on creating hardpoints, molds, fiberglass, and more.",
+      },
+      {
+        name: "Front/Rear Suspension",
+        description:
+          "The suspension of the car requires lots of design work, thinking about how the car will handle and drive. Lots of CAD work will be required in creating suspension geometry, simulating loads and failures in FEA, creating engineering drawings for manufacturing, and more.",
+      },
+      {
+        name: "Array Hinge",
+        description:
+          "The array hinge allows access to the inside of the car, as well as tilting the solar array toward the sun when charging the car. This project is a fun geometry problem, as you need to create a four-point hinge and linkages to lift and tilt the array.",
+      },
+      {
+        name: "Topshell and Canopy",
+        description:
+          "The topshell and canopy are another composites project for the top surface of the car. The topshell mounts the solar panels, along with a hinging canopy for driver access.",
+      },
+      {
+        name: "Driver Occupancy",
+        description:
+          "The driver cell has many constraints due to regulations and safety, as well as a handful of subcomponents such as a pedal box, seatbelts, steering wheel, roll cage, and more.",
+      },
+      {
+        name: "Electrical Integration",
+        description:
+          "The car is just a fancy statue without electronics. Electrical integration will work hand in hand with the electrical team and other mechanical subsystems to create enclosures, mounting brackets, wiring routing, and more.",
+      },
+      {
+        name: "Battery Enclosure",
+        description:
+          "The battery enclosure is a box that encloses the battery pack, battery management system, and battery cooling system while fitting and mounting into the car in a very specific way. This team will work closely with the electrical team to make sure that the battery is properly fitted, protected, and can function properly in the car.",
+      },
+      {
+        name: "Accessory Tools and Integration",
+        description:
+          "The car cannot function without a team and tools around it. Things like wheel-changing equipment, custom car jacks, and space/trailer upgrades such as making shelves and tables, along with much more, will be required to make the team run smoothly.",
+      },
+    ],
+    closing:
+      "We are looking for dedicated students who are excited and eager to learn and excited to work with a collaborative team.",
+  },
+  {
+    name: "Electrical",
+    projects: [
+      {
+        name: "Steering Wheel",
+        description:
+          "The steering wheel is the primary interface between the driver and the solar car. It provides crucial telemetry to the driver and places control of various lights, a horn, cruise control, and several other features at the driver's fingertips. This is a cross-functional team of electrical and mechanical engineers working together to redesign our current steering wheel with the aim of making it lighter and more practical.",
+      },
+      {
+        name: "Driver Interface",
+        description:
+          "The driver interface combines the functionalities of our current telemetry and button interface boards. It enables the driver to control the low voltage and high voltage power distribution systems, drive mode select, emergency shutdown, and various other car functions. It sits on our main CAN bus and transmits vital telemetry to our ground team via a cellular TX/RX chip.",
+      },
+      {
+        name: "Body Controls",
+        description:
+          "The body controls team works with the motor controller, lighting system, and horn. Most of their work will revolve around developing a new printed circuit board to control these components. Additional work includes development and optimization of exterior LEDs and calibration of our motor controller settings.",
+      },
+      {
+        name: "HV Power Distribution",
+        description:
+          "This team works on our HV/LV power distribution system. They will develop a new power distribution board, Battery Management System, MPPT collector, and will be responsible for testing high-current conductors to ensure they meet safety regulations. Additional work will include development of a custom Maximum Power Point Tracker.",
+      },
+      {
+        name: "Array",
+        description:
+          "The photovoltaic cell array is the heart of the solar car. This team will design, build, encapsulate, and optimize a state-of-the-art solar cell array to power the car.",
+      },
+      {
+        name: "Software/Firmware",
+        description:
+          "Firmware and software are everywhere on the solar car. Firmware needs to be written for our embedded systems. Software needs to be written for our custom telemetry dashboard and to optimize race strategy.",
+      },
+    ],
+  },
+  // No detail content supplied for Business yet. The card stays so all three
+  // subteams are represented; it simply does not expand. Do not write filler.
   { name: "Business" },
 ];
 

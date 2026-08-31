@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/ScrollReveal";
-import TeamCard from "@/components/TeamCard";
+import SubTeamPanels from "@/components/SubTeamPanels";
 import SpotlightCard from "@/components/SpotlightCard";
 import {
   alumniEmployers,
@@ -11,7 +12,7 @@ import {
   subTeams,
 } from "@/lib/data";
 import { photos } from "@/lib/photos";
-import { TEAM_NAME, external, links } from "@/lib/site";
+import { APPLY_PATH, TEAM_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Team",
@@ -34,15 +35,23 @@ export default function TeamPage() {
               Sub-Teams
             </h2>
           </Reveal>
-          {/* Three, not four. Cards carry names only until leadership supplies
-              what each subteam owns — see the TODO in lib/data.ts. */}
-          <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {subTeams.map((team, i) => (
-              <Reveal key={team.name} direction="up" delay={i * 0.08}>
-                <TeamCard name={team.name} description={team.description} />
-              </Reveal>
-            ))}
-          </div>
+          {/* Three, not four. Stacked rather than in a 3-up grid: each panel
+              opens to several hundred words, which a narrow column can't carry
+              without turning into a ribbon of text. */}
+          <Reveal className="max-w-4xl mx-auto">
+            <SubTeamPanels teams={subTeams} />
+          </Reveal>
+          {/* Click on pointer devices, tap on touch — same (hover: hover)
+              switch used under the What You Get cards, and for the same
+              reason: input method, not screen width. */}
+          <p className="text-center font-label font-light text-ink/60 text-sm mt-4">
+            <span className="[@media(hover:hover)]:hidden">
+              Tap a card for more information
+            </span>
+            <span className="hidden [@media(hover:hover)]:inline">
+              Click a card for more information
+            </span>
+          </p>
         </div>
       </section>
 
@@ -182,13 +191,12 @@ export default function TeamPage() {
             Engineers, designers, writers, photographers and business students,
             roughly fifty of them, one car.
           </p>
-          <a
-            href={links.apply}
-            {...external}
+          <Link
+            href={APPLY_PATH}
             className="inline-block bg-ink text-cream font-label uppercase tracking-[0.14em] text-sm px-7 py-3 hover:bg-cream hover:text-ink transition-colors"
           >
             Join the Team
-          </a>
+          </Link>
         </Reveal>
       </section>
     </>

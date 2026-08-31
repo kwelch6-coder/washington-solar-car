@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import ContactBlock from "@/components/ContactBlock";
 import Reveal from "@/components/ScrollReveal";
-import { TEAM_NAME, external, links } from "@/lib/site";
+import { APPLY_PATH, TEAM_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -27,16 +28,15 @@ export default function ContactPage() {
             Want To Build The Car?
           </h2>
           <p className="text-lg text-ink/85 mb-8">
-            No experience required. Applications run through one form, and it
-            takes a few minutes.
+            No experience required. Pick the subteam you want to build with
+            and the application takes a few minutes.
           </p>
-          <a
-            href={links.apply}
-            {...external}
+          <Link
+            href={APPLY_PATH}
             className="inline-block bg-ink text-cream font-label uppercase tracking-[0.14em] text-sm px-7 py-3 hover:bg-accent transition-colors"
           >
             Apply Now
-          </a>
+          </Link>
         </Reveal>
       </section>
     </>

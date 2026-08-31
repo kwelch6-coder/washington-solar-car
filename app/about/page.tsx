@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "next/image";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/ScrollReveal";
@@ -13,7 +14,7 @@ import {
   timeline,
 } from "@/lib/data";
 import { photos } from "@/lib/photos";
-import { TEAM_NAME, external, links } from "@/lib/site";
+import { APPLY_PATH, TEAM_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -257,13 +258,12 @@ export default function AboutPage() {
             Where We&apos;re Headed
           </h2>
           <p className="text-lg">{about.whereWeAreHeaded}</p>
-          <a
-            href={links.apply}
-            {...external}
+          <Link
+            href={APPLY_PATH}
             className="mt-8 inline-block bg-ink text-cream font-label uppercase tracking-[0.14em] text-sm px-7 py-3 hover:bg-cream hover:text-ink transition-colors"
           >
             Join the Team
-          </a>
+          </Link>
         </Reveal>
       </section>
     </>
