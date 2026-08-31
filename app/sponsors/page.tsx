@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/ScrollReveal";
+import SponsorWall from "@/components/SponsorWall";
 import { sponsors } from "@/lib/data";
 import { photos } from "@/lib/photos";
 import { TEAM_NAME, external, links } from "@/lib/site";
@@ -64,6 +65,19 @@ export default function SponsorsPage() {
             >
               Donate
             </a>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-ink text-cream pb-20 sm:pb-28">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <Reveal>
+            <h2 className="font-display text-3xl sm:text-4xl uppercase text-center mb-12 sm:mb-16">
+              Our Partners
+            </h2>
+          </Reveal>
+          <Reveal>
+            <SponsorWall />
           </Reveal>
         </div>
       </section>
