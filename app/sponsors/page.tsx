@@ -46,14 +46,14 @@ export default function SponsorsPage() {
         </div>
       </section>
 
-      <section className="bg-ink text-cream py-16 sm:py-24">
+      <section className="bg-accent text-cream py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-5 sm:px-8 text-center">
           <Reveal>
-            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl uppercase mb-4">
               Where We Are
             </h2>
             <p className="text-xl">{sponsors.needMost}</p>
-            <p className="mt-6 text-lg text-cream/85">{sponsors.bestStory}</p>
+            <p className="mt-6 text-lg">{sponsors.bestStory}</p>
           </Reveal>
           <Reveal>
             {/* The single donation destination. Nothing else on the site links
@@ -61,7 +61,7 @@ export default function SponsorsPage() {
             <a
               href={links.donate}
               {...external}
-              className="mt-10 inline-block bg-accent text-cream font-label uppercase tracking-[0.14em] text-sm px-7 py-3 hover:bg-cream hover:text-ink transition-colors"
+              className="mt-10 inline-block bg-ink text-cream font-label uppercase tracking-[0.14em] text-sm px-7 py-3 hover:bg-cream hover:text-ink transition-colors"
             >
               Donate
             </a>
@@ -69,13 +69,11 @@ export default function SponsorsPage() {
         </div>
       </section>
 
-      {/* Its own band, not a continuation of the dark section above it.
-          Three things do the separating, since the logos are white and the
-          section cannot go light: a background one step off --color-ink,
-          roughly 1.5x the vertical padding of its neighbours so it reads as a
-          pause, and full-bleed cream hairlines top and bottom. The heading
-          sits inside the band rather than floating above it. */}
-      <section className="bg-band text-cream border-y border-cream/20 py-24 sm:py-32">
+      {/* Red / black / red: the colour change alone separates this band from
+          its neighbours, so it needs no rules on its edges. The extra vertical
+          padding stays — it is what makes the band read as a pause rather than
+          just another section. */}
+      <section className="bg-ink text-cream py-24 sm:py-32">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal>
             <h2 className="font-display text-3xl sm:text-4xl uppercase text-center mb-12 sm:mb-16">
@@ -100,7 +98,7 @@ export default function SponsorsPage() {
           <p className="mb-8">
             <a
               href={`mailto:${links.email}`}
-              className="underline underline-offset-4 hover:text-ink transition-colors"
+              className="underline underline-offset-4 hover:text-white transition-colors"
             >
               {links.email}
             </a>
