@@ -147,10 +147,11 @@ export default function RacingGrid() {
         })}
       </ul>
 
-      {/* The tax-deductibility line that used to sit here is gone: the exact
-          wording is unconfirmed. What replaces it is a staging notice, because
-          the tier names, amounts and benefits above are placeholders too and
-          this page is read by companies deciding whether to fund the team. */}
+      {/* A staging notice, because the tier names, amounts and benefits above
+          are placeholders and this section is read by companies deciding
+          whether to fund the team. Nothing about donations, giving status or
+          how a gift is treated belongs in this footer — do not add it back
+          when this component is restored. */}
       <p className="rg-foot rg-util rg-draft">
         [placeholder tier structure &mdash; amounts and benefits are not final]
       </p>

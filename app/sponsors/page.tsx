@@ -15,9 +15,6 @@ export const metadata: Metadata = {
 export default function SponsorsPage() {
   return (
     <>
-      {/* No tax-deductibility line here or anywhere else on the page: the
-          exact wording is unconfirmed, and a donation-tax claim is not
-          something to approximate. See the TODO block in lib/data.ts. */}
       <PageHeader
         eyebrow="Partner With Us"
         title="Sponsors"
@@ -67,9 +64,6 @@ export default function SponsorsPage() {
             >
               Donate
             </a>
-            <p className="mt-6 mx-auto max-w-sm border border-dashed border-cream/40 text-cream/60 px-4 py-3 text-sm">
-              [tax-deductibility language — add once confirmed]
-            </p>
           </Reveal>
         </div>
       </section>

@@ -522,7 +522,6 @@ export const race = {
  * TODO, all required before this page can go live:
  *   - Full sponsor list with correct legal names and tier assignments
  *   - The tier structure with dollar amounts and per-tier benefits (see lib/tiers.ts)
- *   - Confirmed donation link, and tax-deductibility language
  *   - Sponsorship contact email
  *   - Whether a sponsorship packet PDF exists to link
  */
