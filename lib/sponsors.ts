@@ -21,15 +21,21 @@ export type Sponsor = {
    */
   scale?: number;
   /**
-   * Skip the white filter and render this logo in its own colours.
+   * How this logo becomes white. Exactly one route, never two.
    *
-   * Set where `brightness(0) invert(1)` destroys the logo: any file with a
-   * solid background flattens to a plain white block, and STF's outline mark
-   * fills its own counters and becomes unreadable. A full-colour logo on the
-   * wall beats a missing sponsor, so these render as supplied. Each one wants
-   * a transparent version sourced — see the report.
+   *  "filter"    Default. The original has a transparent background, so the
+   *              CSS filter whitens it at render time; the file is untouched.
+   *  "converted" Points at a pre-converted white PNG. Already white, so it
+   *              must NOT also be filtered.
+   *  "original"  Cannot be whitened without losing part of the logo, so it
+   *              keeps its own colours. Needs a one-colour version from the
+   *              sponsor.
+   *
+   * Three states rather than a boolean: "already white" and "must stay
+   * coloured" both mean "no CSS filter" but are not the same thing to
+   * maintain.
    */
-  keepColor?: boolean;
+  treatment?: "filter" | "converted" | "original";
 };
 
 /**
@@ -39,8 +45,9 @@ export type Sponsor = {
  *
  * Every logo in the source folder is represented here except tesla.png, which
  * is a zero-byte file with no image data in it at all and cannot be rendered
- * by anything. Files that cannot take the white filter are not dropped — they
- * carry `keepColor` and render as supplied.
+ * by anything. Files whose originals cannot take the CSS filter are converted
+ * to white PNGs ahead of time (see `treatment`); the one logo that survives
+ * neither route keeps its own colours rather than shipping broken.
  *
  * Names are taken from each logo's own wordmark, not from a company registry.
  * They are display names, not verified legal entity names.
@@ -64,21 +71,22 @@ export const sponsors: Sponsor[] = [
   { name: "Ansys", logo: "/sponsors/ansys.png", url: "https://www.ansys.com", scale: 0.592 },
   { name: "Boeing", logo: "/sponsors/boeing.png", url: "https://www.boeing.com", scale: 0.723 },
   { name: "Celsius", logo: "/sponsors/celsius.png", url: "https://www.celsius.com", scale: 0.702 },
-  // Artwork sits on its own solid black field, which very nearly matches the
-  // band, so it reads almost seamlessly despite keeping its colours.
+  // Converted from a black-background original. Transparent margin trimmed
+  // afterwards — the artwork was only 23% of its canvas, which left it far too
+  // small once the black field it used to fill was gone.
   {
     name: "Earthlight Villas",
-    logo: "/sponsors/earthlight-villas.png",
+    logo: "/sponsors/earthlight-villas-white.png",
     url: "",
-    scale: 0.998,
-    keepColor: true,
+    scale: 0.62,
+    treatment: "converted",
   },
   {
     name: "Electroimpact",
-    logo: "/sponsors/electroimpact.png",
+    logo: "/sponsors/electroimpact-white.png",
     url: "",
-    scale: 0.619,
-    keepColor: true,
+    scale: 0.72,
+    treatment: "converted",
   },
   { name: "Kenesto", logo: "/sponsors/kenesto.png", url: "https://kenesto.com", scale: 0.674 },
   // Widest mark at 6.7:1, so it is width-limited and reads heavy at 1.
@@ -87,10 +95,10 @@ export const sponsors: Sponsor[] = [
   { name: "Mitsuba", logo: "/sponsors/mitsuba.png", url: "https://www.mitsuba.co.jp", scale: 0.338 },
   {
     name: "SendCutSend",
-    logo: "/sponsors/sendcutsend.png",
+    logo: "/sponsors/sendcutsend-white.png",
     url: "",
-    scale: 0.408,
-    keepColor: true,
+    scale: 0.42,
+    treatment: "converted",
   },
   // Transparent background, so it is not a white-block case — but the mark is
   // an outline with an opaque white interior, and the filter closes its
@@ -100,13 +108,13 @@ export const sponsors: Sponsor[] = [
     logo: "/sponsors/stf.png",
     url: "",
     scale: 0.654,
-    keepColor: true,
+    treatment: "original",
   },
   {
     name: "The Gill Corporation",
-    logo: "/sponsors/gill-corporation.png",
+    logo: "/sponsors/gill-corporation-white.png",
     url: "",
-    scale: 0.654,
-    keepColor: true,
+    scale: 0.5,
+    treatment: "converted",
   },
 ];

@@ -37,11 +37,13 @@ export default function SponsorWall() {
                 sizes="(min-width: 1024px) 20vw, (min-width: 640px) 28vw, 45vw"
                 className="object-contain"
                 style={{
-                  // Omitted where the filter would destroy the logo — see
-                  // `keepColor` in lib/sponsors.ts.
-                  filter: sponsor.keepColor
-                    ? undefined
-                    : "brightness(0) invert(1)",
+                  // Only "filter" logos get whitened here. "converted" files
+                  // are already white and "original" ones must keep their
+                  // colours, so neither is filtered — see `treatment`.
+                  filter:
+                    (sponsor.treatment ?? "filter") === "filter"
+                      ? "brightness(0) invert(1)"
+                      : undefined,
                 }}
               />
             </div>
