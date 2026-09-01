@@ -9,98 +9,70 @@ export type Tier = {
 };
 
 /**
- * ⚠ PLACEHOLDER TIERS. The real structure has not arrived.
+ * ⚠ PLACEHOLDER DATA. There is no agreed tier structure.
  *
- * Team leadership lists "the tier structure with dollar amounts and per-tier
- * benefits" as outstanding, along with the full sponsor list. Everything below
- * is scaffolding so the grid has something to render and so the swap is a
- * one-file edit when the real numbers land. None of these names, amounts or
- * benefits should be treated as agreed. The section carries a visible draft
- * notice for as long as this comment is here; delete both together.
+ * These names, amounts and benefit lines are scaffolding so the grid has
+ * something to drive it in the lab. They are deliberately generic: the earlier
+ * draft's tier names and dollar figures were never confirmed by the team, and
+ * reusing them here would let unconfirmed numbers start looking official.
  *
- * Array order is render order, top lane first: most expensive leads the grid.
+ * Nothing here is a commitment. When the real structure arrives, replace this
+ * array wholesale and delete the placeholder notice on the lab Sponsors page.
  *
- * Benefit copy is only what the team has actually confirmed. Real companies
- * read this page to decide whether to fund the team, so a benefit invented to
- * balance the columns is a promise someone then has to keep. Where a TODO sits
- * below, the tier renders with fewer lines rather than filler.
+ * Ids are positional (t1…t6) rather than named after a colour or rank — the
+ * grid's per-lane colours key off them in racing-grid.css, and a positional id
+ * carries no implied hierarchy.
  */
 export const tiers: Tier[] = [
   {
-    id: "title",
-    name: "Title",
-    amount: "$50,000",
-    note: "one-time",
-    color: "var(--tier-title)",
-    benefits: [
-      "Name the team",
-      "Design the car's full livery",
-      "Largest logo placement on the car",
-      "Logo on this site",
-      // TODO: confirm any additional Title-only benefits
-    ],
+    id: "t1",
+    name: "Tier One",
+    amount: "$00,000",
+    note: "placeholder",
+    color: "var(--tier-1)",
+    benefits: ["Placeholder benefit line", "Placeholder benefit line"],
   },
   {
-    id: "purple",
-    name: "Purple",
-    amount: "$20,000",
-    note: "one-time",
-    color: "var(--tier-purple)",
-    benefits: [
-      "Large logo placement on the car",
-      "Logo on this site",
-      // TODO: confirm tier-specific benefits
-    ],
+    id: "t2",
+    name: "Tier Two",
+    amount: "$00,000",
+    note: "placeholder",
+    color: "var(--tier-2)",
+    benefits: ["Placeholder benefit line", "Placeholder benefit line"],
   },
   {
-    id: "gold",
-    name: "Gold",
-    amount: "$10,000",
-    note: "one-time",
-    color: "var(--tier-gold)",
-    benefits: [
-      "Logo placement on the car",
-      "Logo on this site",
-      // TODO: confirm tier-specific benefits
-    ],
+    id: "t3",
+    name: "Tier Three",
+    amount: "$00,000",
+    note: "placeholder",
+    color: "var(--tier-3)",
+    benefits: ["Placeholder benefit line", "Placeholder benefit line"],
   },
   {
-    id: "white",
-    name: "White",
-    amount: "$5,000",
-    note: "one-time",
-    color: "var(--tier-white)",
-    benefits: [
-      "Logo placement on the car",
-      "Logo on this site",
-      // TODO: confirm tier-specific benefits
-    ],
+    id: "t4",
+    name: "Tier Four",
+    amount: "$00,000",
+    note: "placeholder",
+    color: "var(--tier-4)",
+    benefits: ["Placeholder benefit line", "Placeholder benefit line"],
   },
   {
-    id: "black",
-    name: "Black",
-    amount: "$2,000",
-    note: "one-time",
-    color: "var(--tier-black)",
-    benefits: [
-      "Logo placement on the car",
-      "Logo on this site",
-      // TODO: confirm tier-specific benefits
-    ],
+    id: "t5",
+    name: "Tier Five",
+    amount: "$00,000",
+    note: "placeholder",
+    color: "var(--tier-5)",
+    benefits: ["Placeholder benefit line", "Placeholder benefit line"],
   },
   {
-    id: "bronze",
-    name: "Bronze",
-    amount: "$1,000",
-    note: "one-time",
-    color: "var(--tier-bronze)",
-    benefits: [
-      "Logo placement on the car",
-      "Logo on this site",
-      // TODO: confirm tier-specific benefits
-    ],
+    id: "t6",
+    name: "Tier Six",
+    amount: "$00,000",
+    note: "placeholder",
+    color: "var(--tier-6)",
+    benefits: ["Placeholder benefit line", "Placeholder benefit line"],
   },
 ];
 
-/** "Title tier, $50,000 one-time" — derived so it can never drift from the render. */
-export const tierLabel = (t: Tier) => `${t.name} tier, ${t.amount} ${t.note}`;
+/** "Tier One, $00,000 placeholder" — derived so it can never drift from the render. */
+export const tierLabel = (t: Tier) => `${t.name}, ${t.amount} ${t.note}`;

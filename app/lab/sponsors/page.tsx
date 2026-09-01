@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import SponsorsPage from "@/app/sponsors/page";
+import SponsorsContent from "@/components/SponsorsContent";
 
 export const metadata: Metadata = { title: "Lab · Sponsors" };
 
-export default function LabSponsorsPage() {
-  return <SponsorsPage />;
+/** Same component as production, with the racing grid switched on. */
+export default function LabSponsors() {
+  return <SponsorsContent racingGrid />;
 }

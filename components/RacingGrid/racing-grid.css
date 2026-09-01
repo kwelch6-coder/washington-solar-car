@@ -10,12 +10,12 @@
   /* Five of six tiers are named after a colour, so each car is the colour it
      is named. Title takes the site red; White takes the site cream; Black is
      the section background itself and is picked out by a hairline instead. */
-  --tier-title: var(--color-accent);
-  --tier-purple: #4b2e83;
-  --tier-gold: #e5c77a;
-  --tier-white: var(--color-cream);
-  --tier-black: var(--color-ink);
-  --tier-bronze: #a9713b;
+  --tier-1: var(--color-accent);
+  --tier-2: #4b2e83;
+  --tier-3: #e5c77a;
+  --tier-4: var(--color-cream);
+  --tier-5: var(--color-ink);
+  --tier-6: #a9713b;
 
   /* Grid geometry. The start line sits at --start-x of the section width; the
      same value resolves as cqw inside each lane, so line and cars agree. */
@@ -37,12 +37,12 @@
        black   42% -> #8f8b82   5.34:1   (50% drops to 4.16 and fails)
        bronze  76% -> #bc8f64   6.31:1
      Black and Purple start darkest and so take the most cream. */
-  --trail-title: color-mix(in oklab, var(--tier-title) 68%, var(--color-cream));
-  --trail-purple: color-mix(in oklab, var(--tier-purple) 52%, var(--color-cream));
-  --trail-gold: color-mix(in oklab, var(--tier-gold) 92%, var(--color-cream));
-  --trail-white: color-mix(in oklab, var(--tier-white) 100%, var(--color-cream));
-  --trail-black: color-mix(in oklab, var(--tier-black) 42%, var(--color-cream));
-  --trail-bronze: color-mix(in oklab, var(--tier-bronze) 76%, var(--color-cream));
+  --trail-1: color-mix(in oklab, var(--tier-1) 68%, var(--color-cream));
+  --trail-2: color-mix(in oklab, var(--tier-2) 52%, var(--color-cream));
+  --trail-3: color-mix(in oklab, var(--tier-3) 92%, var(--color-cream));
+  --trail-4: color-mix(in oklab, var(--tier-4) 100%, var(--color-cream));
+  --trail-5: color-mix(in oklab, var(--tier-5) 42%, var(--color-cream));
+  --trail-6: color-mix(in oklab, var(--tier-6) 76%, var(--color-cream));
 
   position: relative;
   background: var(--color-ink);
@@ -88,36 +88,36 @@
   --lane-start-x: 6cqw;
 }
 
-.rg-lane[data-tier="title"] {
-  --tier: var(--tier-title);
-  --trail: var(--trail-title);
+.rg-lane[data-tier="t1"] {
+  --tier: var(--tier-1);
+  --trail: var(--trail-1);
 }
-.rg-lane[data-tier="purple"] {
-  --tier: var(--tier-purple);
-  --trail: var(--trail-purple);
+.rg-lane[data-tier="t2"] {
+  --tier: var(--tier-2);
+  --trail: var(--trail-2);
 }
-.rg-lane[data-tier="gold"] {
-  --tier: var(--tier-gold);
-  --trail: var(--trail-gold);
+.rg-lane[data-tier="t3"] {
+  --tier: var(--tier-3);
+  --trail: var(--trail-3);
 }
-.rg-lane[data-tier="white"] {
-  --tier: var(--tier-white);
-  --trail: var(--trail-white);
+.rg-lane[data-tier="t4"] {
+  --tier: var(--tier-4);
+  --trail: var(--trail-4);
 }
-.rg-lane[data-tier="black"] {
-  --tier: var(--tier-black);
-  --trail: var(--trail-black);
+.rg-lane[data-tier="t5"] {
+  --tier: var(--tier-5);
+  --trail: var(--trail-5);
 }
-.rg-lane[data-tier="bronze"] {
-  --tier: var(--tier-bronze);
-  --trail: var(--trail-bronze);
+.rg-lane[data-tier="t6"] {
+  --tier: var(--tier-6);
+  --trail: var(--trail-6);
 }
 
 /* A genuinely black car on a near-black section would vanish. Rather than
    lightening the fill, pick the silhouette out with a cream hairline. SVG
    `stroke` inherits, so the body shape picks this up without knowing about it —
    which also holds once the real car-top.svg replaces the placeholder. */
-.rg-lane[data-tier="black"] .rg-car {
+.rg-lane[data-tier="t5"] .rg-car {
   stroke: var(--color-cream);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
