@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { NO_DIFFERENCES, labDifferences } from "@/lib/labDifferences";
+import { NO_DIFFERENCES, SITE_WIDE, labDifferences } from "@/lib/labDifferences";
 
 /**
  * Full-width banner pinned above everything on the lab deployment.
@@ -46,7 +46,7 @@ export default function LabBanner() {
     setOpen(false);
   }
 
-  const items = labDifferences[pathname];
+  const routeItems = labDifferences[pathname] ?? [];
 
   return (
     <div
@@ -74,9 +74,11 @@ export default function LabBanner() {
           className="border-t border-white/30 bg-accent"
         >
           <div className="mx-auto max-w-7xl px-4 py-3 sm:px-8">
-            {items?.length ? (
+            {/* Route-specific first. When there are none, say so outright —
+                an empty panel reads as broken. */}
+            {routeItems.length ? (
               <ul className="space-y-1.5">
-                {items.map((item) => (
+                {routeItems.map((item) => (
                   <li key={item} className="flex gap-2 text-sm leading-snug">
                     <span aria-hidden="true">&middot;</span>
                     <span>{item}</span>
@@ -84,8 +86,26 @@ export default function LabBanner() {
                 ))}
               </ul>
             ) : (
-              /* Never an empty panel — an empty panel reads as broken. */
               <p className="text-sm leading-snug">{NO_DIFFERENCES}</p>
+            )}
+
+            {/* Differences that are not tied to a route still have to be
+                listed somewhere, or a site-wide change goes unmentioned
+                simply because the map is keyed by route. */}
+            {SITE_WIDE.length > 0 && (
+              <>
+                <p className="mt-3 mb-1.5 font-label text-[11px] uppercase tracking-wider text-white/70">
+                  On every lab page
+                </p>
+                <ul className="space-y-1.5">
+                  {SITE_WIDE.map((item) => (
+                    <li key={item} className="flex gap-2 text-sm leading-snug">
+                      <span aria-hidden="true">&middot;</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
           </div>
         </div>

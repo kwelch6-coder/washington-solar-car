@@ -10,6 +10,16 @@ import { claimIntro, endIntro, useIsomorphicLayoutEffect } from "@/lib/intro";
 import { APPLY_PATH, PRODUCTION_URL, TEAM_NAME, external, links } from "@/lib/site";
 
 const LINKS = [
+  // LAB ONLY. On production the logo goes home, so this would duplicate it —
+  // which is why it is absent from main's copy of this file.
+  //
+  // Unconditional rather than behind a runtime check: on this branch every
+  // route is a lab route, so a condition would always be true. It is the same
+  // reason the logo's exit is unconditional here. The branch is the condition.
+  //
+  // REMOVE THIS ENTRY if the logo is ever changed to point home on the lab —
+  // the two would then do the same job.
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/team", label: "Team" },
   { href: "/cars", label: "Cars" },

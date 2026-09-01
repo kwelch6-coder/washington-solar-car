@@ -11,6 +11,15 @@
  * Routes with no entry are handled explicitly by the panel, which says the page
  * matches the live site. Never render an empty panel: that reads as broken.
  */
+/**
+ * Differences that apply on every page rather than one route. Shown above the
+ * route-specific bullets so a site-wide change cannot go unmentioned just
+ * because the map is keyed by route.
+ */
+export const SITE_WIDE: string[] = [
+  "The menu has a Home link that the live site does not need",
+];
+
 export const labDifferences: Record<string, string[]> = {
   "/about": [
     "The race result headline is bigger, and split into two lines",
@@ -26,6 +35,10 @@ export const labDifferences: Record<string, string[]> = {
   ],
 };
 
-/** Shown for any route with no entry above. */
+/**
+ * Shown for any route with no entry above. Worded to stay true alongside
+ * SITE_WIDE: claiming the page "matches the live site" outright would be wrong
+ * while a site-wide difference exists.
+ */
 export const NO_DIFFERENCES =
-  "No changes on this page yet. This page matches the live site.";
+  "No changes specific to this page — it otherwise matches the live site.";
