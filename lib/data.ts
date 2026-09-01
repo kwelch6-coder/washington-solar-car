@@ -224,9 +224,14 @@ export const subTeams: SubTeam[] = [
       },
     ],
   },
-  // No detail content supplied for Business yet. The card stays so all three
-  // subteams are represented; it simply does not expand. Do not write filler.
-  { name: "Business" },
+  // No project list supplied for Business yet, so the card does not expand.
+  // The description exists only to say so — beside two cards that open into
+  // full project lists, a bare name plate reads as broken rather than pending.
+  // Do not invent project descriptions here.
+  {
+    name: "Business",
+    description: "Project details for this subteam are still being written.",
+  },
 ];
 
 export type SpotlightCard = {

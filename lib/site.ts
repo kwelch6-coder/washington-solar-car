@@ -58,3 +58,10 @@ export const external = {
 
 /** Canonical origin, used by robots.txt and the sitemap. */
 export const SITE_URL = "https://washington-solar-car.vercel.app";
+
+/**
+ * Where the logo goes on the lab deployment. Absolute on purpose: "/" is this
+ * deployment's own home page, so a relative link would keep you in the lab
+ * rather than leaving it.
+ */
+export const PRODUCTION_URL = SITE_URL;

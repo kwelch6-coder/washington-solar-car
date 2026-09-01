@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description: `Partner with ${TEAM_NAME}. Your logo travels the length of the country on a car built by the students you want to hire.`,
 };
 
+/** Lab branch: the racing grid is on. Production renders it off. */
 export default function SponsorsPage() {
-  return <SponsorsContent />;
+  return <SponsorsContent racingGrid />;
 }

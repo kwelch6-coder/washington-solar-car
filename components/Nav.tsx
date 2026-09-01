@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import SunIcon from "./SunIcon";
 import { claimIntro, endIntro, useIsomorphicLayoutEffect } from "@/lib/intro";
-import { APPLY_PATH, TEAM_NAME, external, links } from "@/lib/site";
+import { APPLY_PATH, PRODUCTION_URL, TEAM_NAME, external, links } from "@/lib/site";
 
 const LINKS = [
   { href: "/about", label: "About" },
@@ -28,11 +28,10 @@ export default function Nav() {
   // inside whichever copy you are already viewing, rather than silently
   // dropping you back into production halfway through a test. Production is
   // the empty prefix, so its markup is unchanged.
-  const inLab = pathname === "/lab" || pathname.startsWith("/lab/");
-  const base = inLab ? "/lab" : "";
-  // Where "home" is for the copy you are in. Drives the hero-blend state, and
-  // is deliberately NOT what the logo links to — see below.
-  const homeHref = base || "/";
+  // Lab branch: every route on this deployment is a lab route, so nav links
+  // are the plain paths and need no prefixing. Nothing here special-cases the
+  // lab, which is the point — the nav works because the whole site is the lab.
+  const homeHref = "/";
   const headerRef = useRef<HTMLElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
@@ -179,15 +178,15 @@ export default function Nav() {
         ref={barRef}
         className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-5 py-3 sm:px-8"
       >
-        {/* The logo always points at production, which makes it the one-tap way
-            out of the lab. Identical mark, identical styling, identical link —
-            only the destination and the accessible name differ, so nothing
-            about it advertises that you are in a sandbox. Same element at every
-            breakpoint, so the mobile bar gets the same exit. */}
-        <Link
-          href="/"
+        {/* The one-tap way out of the lab. Absolute, not "/" — on this
+            deployment "/" is the lab's own home page, so a relative link would
+            never leave. A plain <a> rather than next/link because it crosses
+            origins. Same element at every breakpoint, so the mobile bar gets
+            the same exit. */}
+        <a
+          href={PRODUCTION_URL}
           className="flex items-center gap-2"
-          aria-label={inLab ? "Return to the main site" : `${TEAM_NAME} home`}
+          aria-label="Return to the main site"
         >
           <Image
             src={overHero ? "/Main-logo-white.png" : "/main-logo-black.png"}
@@ -197,11 +196,11 @@ export default function Nav() {
             className="h-7 w-auto max-[359px]:h-6 sm:h-9"
             priority
           />
-        </Link>
+        </a>
 
         <nav className="hidden lg:flex items-center gap-7 font-label font-light text-sm tracking-[0.12em] uppercase">
           {LINKS.map((link) => {
-            const href = `${base}${link.href}`;
+            const href = link.href;
             const current = pathname === href;
             return (
               <Link
@@ -231,7 +230,7 @@ export default function Nav() {
           <a href={links.donate} {...external} className={ctaClass}>
             Donate
           </a>
-          <Link href={`${base}${APPLY_PATH}`} className={ctaClass}>
+          <Link href={APPLY_PATH} className={ctaClass}>
             Join the Team
           </Link>
 
@@ -254,7 +253,7 @@ export default function Nav() {
           }`}
         >
           {LINKS.map((link) => {
-            const href = `${base}${link.href}`;
+            const href = link.href;
             const current = pathname === href;
             return (
               <Link

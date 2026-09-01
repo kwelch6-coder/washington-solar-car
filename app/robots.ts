@@ -1,15 +1,15 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/site";
 
+/**
+ * Lab branch. Every route on this deployment is experimental, so the whole
+ * origin is disallowed rather than a /lab subtree — that prefix no longer
+ * exists here. Production's robots.ts allows the site and disallows nothing.
+ *
+ * No sitemap is advertised: this deployment should not be indexed at all, and
+ * pointing crawlers at production's URLs from here would only muddy things.
+ */
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      // Obscurity, not security — the route is discoverable from the bundle
-      // and the footer links to it. This only keeps it out of search.
-      disallow: "/lab",
-    },
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    rules: { userAgent: "*", disallow: "/" },
   };
 }

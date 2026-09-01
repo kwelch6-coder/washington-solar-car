@@ -3,6 +3,8 @@ import { Anton, Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import LabBadge from "@/components/LabBadge";
+import LabNotice from "@/components/LabNotice";
 import { TEAM_NAME, UNIVERSITY } from "@/lib/site";
 
 const anton = Anton({
@@ -30,6 +32,9 @@ export const metadata: Metadata = {
     template: `%s — ${TEAM_NAME}`,
   },
   description: `${TEAM_NAME} is a student team at the ${UNIVERSITY} that designs, builds, and races a solar car. In 2026 we finished 4th in the SOV class at the American Solar Challenge, the top American team in the class.`,
+  // Lab branch: the whole deployment is experimental, so every page is
+  // noindex. Production sets no robots directive and stays indexable.
+  robots: { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
@@ -53,7 +58,12 @@ export default function RootLayout({
           z-index descendants, which would hide that strip. The cream canvas
           comes from `html` in globals.css instead. */}
       <body className="relative min-h-full flex flex-col text-ink">
+        {/* With the /lab prefix gone, these two are the only signal that this
+            is not the real site — so they sit in the root layout and appear on
+            every page rather than under a route segment. */}
         <Nav />
+        <LabNotice />
+        <LabBadge />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
