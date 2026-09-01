@@ -96,13 +96,14 @@ export default function Footer() {
           {/* Reads as a typographic flourish closing the line. Same colour and
               size as the copyright text around it, no hover affordance, no
               tooltip — but a real link with a name for screen readers. */}
-          <Link
-            href="/lab"
+          <a
+            href={links.lab}
+            {...external}
             aria-label="Lab"
             className="not-italic no-underline"
           >
             &#9733;
-          </Link>
+          </a>
         </p>
         <p>A student organization at the {UNIVERSITY}.</p>
       </div>
