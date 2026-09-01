@@ -105,11 +105,18 @@ export default function AboutContent({
             <p className="font-label font-light text-xs uppercase tracking-[0.3em] text-cream/70 mb-3">
               {season2026.event}
             </p>
-            <h2 className="font-display text-4xl sm:text-6xl uppercase leading-[0.9] mb-4">
-              {season2026.headline}
+            {/* Two distinct elements, not one block. The display line keeps
+                its tight tracking; the supporting line returns to normal
+                tracking, body face and a 65ch measure so it wraps rather than
+                running the container's full width — 54ch measures ~68 characters
+                here, since `ch` is the width of "0" and Inter's is narrow. The
+                mb-6/mb-8 gap is the
+                real fix — the old mb-4 read as one crowded unit. */}
+            <h2 className="font-display text-4xl sm:text-6xl uppercase leading-[1.05] tracking-tight mb-6 sm:mb-8">
+              {season2026.resultLine}
             </h2>
-            <p className="text-cream/90 max-w-2xl">
-              {season2026.route}. {season2026.field}
+            <p className="max-w-[54ch] text-base sm:text-lg font-normal tracking-normal leading-[1.55] text-cream/90">
+              {season2026.resultDetail}
             </p>
           </Reveal>
 
@@ -127,6 +134,12 @@ export default function AboutContent({
               ))}
             </div>
             <p className="mt-3 text-cream/70 text-sm">{season2026.milesNote}</p>
+            {/* Displaced from the headline block when it became a
+                two-part treatment. Still verified content, so it
+                keeps a home rather than being dropped. */}
+            <p className="mt-2 max-w-[70ch] text-cream/70 text-sm leading-[1.55]">
+              {season2026.route}. {season2026.field}
+            </p>
           </Reveal>
 
           <div className="mt-12 grid md:grid-cols-2 gap-10">

@@ -3,8 +3,7 @@ import { Anton, Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import LabBadge from "@/components/LabBadge";
-import LabNotice from "@/components/LabNotice";
+import LabBanner from "@/components/LabBanner";
 import { TEAM_NAME, UNIVERSITY } from "@/lib/site";
 
 const anton = Anton({
@@ -58,12 +57,10 @@ export default function RootLayout({
           z-index descendants, which would hide that strip. The cream canvas
           comes from `html` in globals.css instead. */}
       <body className="relative min-h-full flex flex-col text-ink">
-        {/* With the /lab prefix gone, these two are the only signal that this
-            is not the real site — so they sit in the root layout and appear on
-            every page rather than under a route segment. */}
+        {/* The only signal that this is not the real site, so it sits above
+            everything, on every page, and cannot be dismissed. */}
+        <LabBanner />
         <Nav />
-        <LabNotice />
-        <LabBadge />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>

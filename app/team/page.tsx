@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/ScrollReveal";
 import SubTeamPanels from "@/components/SubTeamPanels";
+import MemberGrid from "@/components/MemberGrid";
 import SpotlightCard from "@/components/SpotlightCard";
 import {
   alumniEmployers,
@@ -11,6 +12,7 @@ import {
   spotlightCards,
   subTeams,
 } from "@/lib/data";
+import { members } from "@/lib/members";
 import { photos } from "@/lib/photos";
 import { APPLY_PATH, TEAM_NAME } from "@/lib/site";
 
@@ -155,6 +157,22 @@ export default function TeamPage() {
             <p className="mt-4 text-ink/60 text-sm text-center">
               Leads serve one-year terms.
             </p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-cream pb-16 sm:pb-24">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <Reveal>
+            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent text-center mb-4">
+              The Whole Team
+            </h2>
+            <p className="text-center text-ink/60 mb-12">
+              Photos are still being taken. Every slot below is a placeholder.
+            </p>
+          </Reveal>
+          <Reveal>
+            <MemberGrid members={members} />
           </Reveal>
         </div>
       </section>

@@ -514,6 +514,16 @@ export const season2026 = {
   className: "Single Occupant Vehicle",
   route: "Minneapolis to Amarillo, down the Great River Road and Route 66",
   place: "4th",
+  /** Display line. Short enough to carry the section on its own. */
+  resultLine: "Fourth in the world. First in America.",
+  /**
+   * Supporting line. The American claim stays tied to the Single-Occupant
+   * Vehicle class — Appalachian State won the Multi-Occupant class and is also
+   * American, so an unqualified "top American team" is contestable. Do not
+   * shorten this.
+   */
+  resultDetail:
+    "At the 2026 American Solar Challenge we placed 4th in the Single-Occupant Vehicle class, behind only Belgium, the Netherlands, and Canada. We were the top American team in the class, and the only one to complete the full route.",
   headline: `4th in the SOV class, and ${sovClaim.long}`,
   official: [
     { label: "Official miles", value: "1,749.4" },

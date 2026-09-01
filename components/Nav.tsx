@@ -159,12 +159,16 @@ export default function Nav() {
       />
       <header
         ref={headerRef}
-        className={`sticky top-0 z-50 border-b-2 border-transparent ${
+        className={`sticky z-50 border-b-2 border-transparent ${
         overHero
           ? "bg-ink text-cream"
           : "bg-cream/95 backdrop-blur text-ink"
       } ${isHidden ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"}`}
       style={{
+          // Sticks below the lab banner rather than underneath it. The
+          // variable is published by LabBanner and is unset on production,
+          // where the fallback resolves to 0.
+          top: "var(--lab-banner-h, 0px)",
         paddingTop: "env(safe-area-inset-top)",
         // Tailwind v4 compiles `-translate-y-full` to the `translate` property,
         // not `transform` — transitioning `transform` here animated nothing and

@@ -16,6 +16,13 @@
   --font-label: var(--font-poppins);
 }
 
+/* Lab branch only. LabBanner measures itself and publishes its height here,
+   so the page shifts down by exactly the right amount at every breakpoint and
+   again when the differences panel expands. Falls back to 0 if it is absent. */
+body {
+  padding-top: var(--lab-banner-h, 0px);
+}
+
 html {
   scroll-behavior: smooth;
   background: var(--color-cream);
