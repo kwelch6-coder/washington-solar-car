@@ -35,6 +35,13 @@ export const links = {
     "https://docs.google.com/forms/d/e/1FAIpQLSfsKaRukCikBrVyzfyoqAhPPVOX5_9A22e8znTZsHQTLaHAGw/viewform",
   applyElectrical:
     "https://docs.google.com/forms/d/e/1FAIpQLSecw4pRc5Wo8qW7J2uXjCOhWAibaRlqh96-dxAe86HpLJdnvQ/viewform",
+  /**
+   * The lab sandbox. An absolute URL to the lab branch deployment, not a
+   * relative /lab path: the lab routes live only on that branch, so a relative
+   * link would 404 here. Absolute means the same link works from production
+   * and from the lab, with no per-context behaviour.
+   */
+  lab: "https://washington-solar-car-git-lab-svt-uw.vercel.app",
 } as const;
 
 /**

@@ -91,7 +91,20 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-cream/20 text-cream/50 text-xs px-5 sm:px-8 py-4 flex flex-col sm:flex-row justify-between gap-2">
-        <p>&copy; {new Date().getFullYear()} {TEAM_NAME}. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} {TEAM_NAME}. All rights reserved.{" "}
+          {/* Reads as a typographic flourish closing the line. Same colour and
+              size as the copyright text around it, no hover affordance, no
+              tooltip — but a real link with a name for screen readers. */}
+          <a
+            href={links.lab}
+            {...external}
+            aria-label="Lab"
+            className="not-italic no-underline"
+          >
+            &#9733;
+          </a>
+        </p>
         <p>A student organization at the {UNIVERSITY}.</p>
       </div>
     </footer>
