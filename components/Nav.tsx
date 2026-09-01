@@ -28,7 +28,10 @@ export default function Nav() {
   // inside whichever copy you are already viewing, rather than silently
   // dropping you back into production halfway through a test. Production is
   // the empty prefix, so its markup is unchanged.
-  const base = pathname === "/lab" || pathname.startsWith("/lab/") ? "/lab" : "";
+  const inLab = pathname === "/lab" || pathname.startsWith("/lab/");
+  const base = inLab ? "/lab" : "";
+  // Where "home" is for the copy you are in. Drives the hero-blend state, and
+  // is deliberately NOT what the logo links to — see below.
   const homeHref = base || "/";
   const headerRef = useRef<HTMLElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
@@ -176,7 +179,16 @@ export default function Nav() {
         ref={barRef}
         className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-5 py-3 sm:px-8"
       >
-        <Link href={homeHref} className="flex items-center gap-2" aria-label={`${TEAM_NAME} home`}>
+        {/* The logo always points at production, which makes it the one-tap way
+            out of the lab. Identical mark, identical styling, identical link —
+            only the destination and the accessible name differ, so nothing
+            about it advertises that you are in a sandbox. Same element at every
+            breakpoint, so the mobile bar gets the same exit. */}
+        <Link
+          href="/"
+          className="flex items-center gap-2"
+          aria-label={inLab ? "Return to the main site" : `${TEAM_NAME} home`}
+        >
           <Image
             src={overHero ? "/Main-logo-white.png" : "/main-logo-black.png"}
             alt={`${TEAM_NAME} logo`}
