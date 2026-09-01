@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LabBadge from "@/components/LabBadge";
+import LabNotice from "@/components/LabNotice";
 
 /**
  * Applies to every route under /lab. Pages below may add a title; robots is
@@ -21,6 +22,7 @@ export default function LabLayout({
 }) {
   return (
     <>
+      <LabNotice />
       <LabBadge />
       {children}
     </>
