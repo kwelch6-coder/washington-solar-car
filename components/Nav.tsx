@@ -24,6 +24,12 @@ const REVEAL_ZONE = 72;
 
 export default function Nav() {
   const pathname = usePathname();
+  // The lab mirrors the site under /lab. Prefixing links here keeps navigation
+  // inside whichever copy you are already viewing, rather than silently
+  // dropping you back into production halfway through a test. Production is
+  // the empty prefix, so its markup is unchanged.
+  const base = pathname === "/lab" || pathname.startsWith("/lab/") ? "/lab" : "";
+  const homeHref = base || "/";
   const headerRef = useRef<HTMLElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
@@ -36,7 +42,7 @@ export default function Nav() {
   const [hidden, setHidden] = useState(false);
   // Only the home page has a dark hero for the bar to blend into; every other
   // page starts on cream, so the bar stays light there from the first paint.
-  const [overHero, setOverHero] = useState(pathname === "/");
+  const [overHero, setOverHero] = useState(pathname === homeHref);
 
   // Reset per-route chrome during render rather than in an effect, so the bar
   // never paints one frame in the previous route's state.
@@ -45,7 +51,7 @@ export default function Nav() {
     setPrevPath(pathname);
     setOpen(false);
     setHidden(false);
-    setOverHero(pathname === "/");
+    setOverHero(pathname === homeHref);
   }
 
   // Page offset at which the sticky bar's bottom edge clears the hero.
@@ -170,7 +176,7 @@ export default function Nav() {
         ref={barRef}
         className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-5 py-3 sm:px-8"
       >
-        <Link href="/" className="flex items-center gap-2" aria-label={`${TEAM_NAME} home`}>
+        <Link href={homeHref} className="flex items-center gap-2" aria-label={`${TEAM_NAME} home`}>
           <Image
             src={overHero ? "/Main-logo-white.png" : "/main-logo-black.png"}
             alt={`${TEAM_NAME} logo`}
@@ -183,11 +189,12 @@ export default function Nav() {
 
         <nav className="hidden lg:flex items-center gap-7 font-label font-light text-sm tracking-[0.12em] uppercase">
           {LINKS.map((link) => {
-            const current = pathname === link.href;
+            const href = `${base}${link.href}`;
+            const current = pathname === href;
             return (
               <Link
                 key={link.href}
-                href={link.href}
+                href={href}
                 aria-current={current ? "page" : undefined}
                 className={`transition-colors ${
                   current
@@ -212,7 +219,7 @@ export default function Nav() {
           <a href={links.donate} {...external} className={ctaClass}>
             Donate
           </a>
-          <Link href={APPLY_PATH} className={ctaClass}>
+          <Link href={`${base}${APPLY_PATH}`} className={ctaClass}>
             Join the Team
           </Link>
 
@@ -235,11 +242,12 @@ export default function Nav() {
           }`}
         >
           {LINKS.map((link) => {
-            const current = pathname === link.href;
+            const href = `${base}${link.href}`;
+            const current = pathname === href;
             return (
               <Link
                 key={link.href}
-                href={link.href}
+                href={href}
                 onClick={() => setOpen(false)}
                 aria-current={current ? "page" : undefined}
                 className={`transition-colors ${

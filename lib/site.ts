@@ -48,3 +48,6 @@ export const external = {
   target: "_blank",
   rel: "noopener noreferrer",
 } as const;
+
+/** Canonical origin, used by robots.txt and the sitemap. */
+export const SITE_URL = "https://washington-solar-car.vercel.app";
