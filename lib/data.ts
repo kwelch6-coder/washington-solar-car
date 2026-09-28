@@ -64,7 +64,7 @@ export const statStrip = [
 ];
 
 export const milestone =
-  "At the 2026 American Solar Challenge we finished 4th in the Single-Occupant Vehicle class and were the top American team in it, covering 1,749.4 official miles from Minneapolis to Amarillo. We were the only American SOV team to complete the entire base route.";
+  "At the 2026 American Solar Challenge we finished 4th in the Single-Occupant Vehicle class and were the top American team, covering 1,749.4 official miles from Minneapolis to Amarillo. We were the only American SOV team to complete the entire base route.";
 
 export type TimelineEntry = {
   year: string;
