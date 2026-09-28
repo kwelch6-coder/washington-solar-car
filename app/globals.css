@@ -3,7 +3,11 @@
 :root {
   --color-cream: #f3efe2;
   --color-ink: #17140f;
-  --color-accent: #c1272d;
+  /* University of Washington Spirit Purple. Already a colour-neutral token
+     name, so nothing needed renaming when the value changed from red.
+     Note: UW restructured its palette — this is now the SECONDARY purple; the
+     dominant brand colour is Husky Purple #32006e. Both are official. */
+  --color-accent: #4b2e83;
 }
 
 @theme inline {
