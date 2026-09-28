@@ -163,8 +163,12 @@ export default function AboutContent({
                     </span>
                     <span className="text-cream/90 tabular-nums">
                       {s.miles}
+                      {/* /70, not /60: cream at 60% over the purple measures
+                          4.32:1, under the 4.5:1 this 16px text needs. It
+                          cleared when the accent was red. 70% gives 5.30:1 and
+                          matches the stage place beside it. */}
                       {s.note && (
-                        <span className="text-cream/60"> · {s.note}</span>
+                        <span className="text-cream/70"> · {s.note}</span>
                       )}
                     </span>
                   </li>
