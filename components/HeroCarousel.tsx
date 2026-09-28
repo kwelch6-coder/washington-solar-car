@@ -101,9 +101,58 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
               className="object-cover"
               style={{ objectPosition: photo.position }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-ink from-0% via-ink/20 via-45% to-ink/90" />
+            {/* DEPTH — multiply. Painted first so it blends with the photo
+                only; the seat band above then covers it where an exact colour
+                match is needed. Below that band this deepens the photo's
+                own shadows instead of laying grey over it, which is what made
+                the old version look muddy. Tinted toward UW purple rather than
+                neutral black, so the darkening reads as deliberate and ties the
+                hero to the brand. It is not pure black: pure black under
+                multiply crushes the top of the photo to nothing. */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 mix-blend-multiply"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to bottom," +
+                  " color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 0%," +
+                  " color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 14%," +
+                  " color-mix(in srgb, color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 55%, transparent) 26%," +
+                  " color-mix(in srgb, color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 24%, transparent) 38%," +
+                  " transparent 58%)",
+              }}
+            />
+            {/* Two layers, because the top of this carousel is doing two jobs
+                that one gradient cannot do at once.
+
+                SEAT — normal blend. The hero section above is solid --color-ink
+                and the title overhangs the join, so the first band here has to
+                be exactly that colour or a seam appears through the type. A
+                blend mode cannot promise an exact colour match, so this layer
+                stays unblended — and it paints AFTER the multiply layer below,
+                because multiply applied over this band darkened it to rgb(4,2,3)
+                against the section's rgb(23,20,15) and put the seam straight
+                back. Solid to 12%, then most of the fall across the
+                next 25%, then a long tail out. The stops are bunched, not
+                evenly spaced — evenly spaced stops are what made the old
+                version read as a flat grey haze. */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to bottom," +
+                  " var(--color-ink) 0%," +
+                  " var(--color-ink) 12%," +
+                  " color-mix(in srgb, var(--color-ink) 72%, transparent) 19%," +
+                  " color-mix(in srgb, var(--color-ink) 44%, transparent) 26%," +
+                  " color-mix(in srgb, var(--color-ink) 22%, transparent) 33%," +
+                  " color-mix(in srgb, var(--color-ink) 9%, transparent) 44%," +
+                  " transparent 62%)",
+              }}
+            />
             {/* Focused scrim so the text block reads on light or busy photos. */}
-            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent" />
 
             <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-16 sm:px-20 pb-16 sm:pb-20">
               {slide.eyebrow && (
