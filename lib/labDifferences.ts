@@ -23,7 +23,8 @@ export const SITE_WIDE: string[] = [
 export const labDifferences: Record<string, string[]> = {
   "/": [
     "The quote under the numbers fades in word by word as you scroll",
-    "More space around that quote, and a reworked shadow behind the hero title",
+    "That quote is smaller and lighter, sitting in much more open space",
+    "A lighter, shorter shadow over the top of the hero photo",
   ],
   "/about": [
     "The race result headline is bigger, and split into two lines",

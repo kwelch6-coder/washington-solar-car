@@ -108,7 +108,13 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                 the old version look muddy. Tinted toward UW purple rather than
                 neutral black, so the darkening reads as deliberate and ties the
                 hero to the brand. It is not pure black: pure black under
-                multiply crushes the top of the photo to nothing. */}
+                multiply crushes the top of the photo to nothing.
+
+                Deliberately restrained. The title is large enough to carry
+                itself, so this is not protecting legibility — it only has to
+                give the top edge of the photo some weight. Peak strength below
+                the seat band is well under half, and the whole thing is out by
+                36% of the frame. */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 mix-blend-multiply"
@@ -116,10 +122,10 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                 backgroundImage:
                   "linear-gradient(to bottom," +
                   " color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 0%," +
-                  " color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 14%," +
-                  " color-mix(in srgb, color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 55%, transparent) 26%," +
-                  " color-mix(in srgb, color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 24%, transparent) 38%," +
-                  " transparent 58%)",
+                  " color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 12%," +
+                  " color-mix(in srgb, color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 34%, transparent) 18%," +
+                  " color-mix(in srgb, color-mix(in srgb, var(--color-ink) 62%, var(--color-accent)) 14%, transparent) 25%," +
+                  " transparent 36%)",
               }}
             />
             {/* Two layers, because the top of this carousel is doing two jobs
@@ -132,10 +138,15 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                 stays unblended — and it paints AFTER the multiply layer below,
                 because multiply applied over this band darkened it to rgb(4,2,3)
                 against the section's rgb(23,20,15) and put the seam straight
-                back. Solid to 12%, then most of the fall across the
-                next 25%, then a long tail out. The stops are bunched, not
-                evenly spaced — evenly spaced stops are what made the old
-                version read as a flat grey haze. */}
+                back. That band keeps its full strength and its height — it is
+                the seam fix, and it is already skinnier than the overhang it
+                has to sit behind.
+
+                Everything after it is the part that was pulled back: it now
+                drops to just over a third the moment the band ends, and is
+                fully transparent by 38% of the frame rather than 62%. The
+                stops are still bunched, not evenly spaced — evenly spaced
+                stops are what made the original read as a flat grey haze. */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-0"
@@ -144,11 +155,10 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                   "linear-gradient(to bottom," +
                   " var(--color-ink) 0%," +
                   " var(--color-ink) 12%," +
-                  " color-mix(in srgb, var(--color-ink) 72%, transparent) 19%," +
-                  " color-mix(in srgb, var(--color-ink) 44%, transparent) 26%," +
-                  " color-mix(in srgb, var(--color-ink) 22%, transparent) 33%," +
-                  " color-mix(in srgb, var(--color-ink) 9%, transparent) 44%," +
-                  " transparent 62%)",
+                  " color-mix(in srgb, var(--color-ink) 36%, transparent) 17%," +
+                  " color-mix(in srgb, var(--color-ink) 17%, transparent) 23%," +
+                  " color-mix(in srgb, var(--color-ink) 6%, transparent) 29%," +
+                  " transparent 38%)",
               }}
             />
             {/* Focused scrim so the text block reads on light or busy photos. */}

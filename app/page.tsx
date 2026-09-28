@@ -21,8 +21,10 @@ export default function Home() {
       <section className="bg-cream py-20 sm:py-32 lg:py-44">
         {/* The measure cap lives on the paragraph, not here: `ch` resolves
             against the element's own font-size, and on this wrapper that is the
-            inherited 16px rather than the quote's 30px — which silently capped
-            it at 444px instead of the intended measure. */}
+            inherited 16px rather than the quote's own — which silently capped
+            it at 444px instead of the intended measure. Because it is in `ch`
+            it tracks the type down: a smaller quote gets a physically narrower
+            block at the same characters per line, which is the point. */}
         <div className="mx-auto max-w-5xl px-6 sm:px-8 text-center">
           {/* The fill is the entrance here, so there is no Reveal wrapper —
               a block fade plus a word fill would be two animations doing the
@@ -35,12 +37,19 @@ export default function Home() {
               from that, never toward it. dimColor is that same ink mixed to
               ~16% against the cream; fillColor is what text-ink/90 already
               resolves to, so script and stylesheet agree at the end. */}
+          {/* Small, light and tightly led, inside the same large field of
+              space. The scale of this moment comes from the padding on the
+              section, not from the type — a modest quote in a lot of empty
+              cream reads as more considered than a large one filling it.
+              Leading is well under the 1.6 a passage of body copy would want,
+              so the lines bind into one shape rather than reading as separate
+              rows. */}
           <ScrollFillText
-            className="mx-auto max-w-[34ch] text-xl sm:text-2xl lg:text-3xl leading-[1.6] text-ink/90"
+            className="mx-auto max-w-[34ch] font-light text-lg sm:text-xl lg:text-2xl leading-[1.25] text-ink/90"
             dimColor="rgb(208, 204, 192)"
             fillColor="rgb(45, 42, 36)"
-            start="top bottom"
-            end="top 38%"
+            start="top 78%"
+            end="top 26%"
           >
             {milestone}
           </ScrollFillText>
