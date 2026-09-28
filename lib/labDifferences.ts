@@ -30,6 +30,7 @@ export const labDifferences: Record<string, string[]> = {
     "Tier names and dollar amounts are placeholders, not real",
   ],
   "/team": [
+    "New photo gallery from the race season, in a different order each visit",
     "Placeholder grid showing where team headshots will go",
     "The Business subteam card now says its details are still being written",
   ],

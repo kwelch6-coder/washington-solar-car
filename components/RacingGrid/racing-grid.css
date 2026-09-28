@@ -7,11 +7,14 @@
    ========================================================================== */
 
 .rg-root {
-  /* Five of six tiers are named after a colour, so each car is the colour it
-     is named. Title takes the site red; White takes the site cream; Black is
-     the section background itself and is picked out by a hairline instead. */
+  /* Six placeholder lanes that only need to be told apart from each other.
+     Lane 1 follows the brand colour; lane 4 is the site cream; lane 5 is the
+     section background itself and is picked out by a hairline instead.
+     Lane 2 was #4b2e83, which became identical to lane 1 the moment the brand
+     colour changed to UW purple — it is now UW Accent Teal, which sits near
+     none of the others. */
   --tier-1: var(--color-accent);
-  --tier-2: #4b2e83;
+  --tier-2: #2ad2c9;
   --tier-3: #e5c77a;
   --tier-4: var(--color-cream);
   --tier-5: var(--color-ink);
@@ -28,17 +31,18 @@
   --trail-inset: 8px;
 
   /* Trail = tier colour mixed with cream. NOT the car colour at low opacity —
-     that leaves it too dark for ink text to read against. Tuned per tier, each
+     that leaves it too dark for ink text to read against. Tuned per lane, each
      measured against --color-ink rather than sharing one percentage:
-       title   68% -> #d87166   5.67:1
-       purple  52% -> #9689b3   5.72:1
-       gold    92% -> #e6ca83  11.52:1
-       white  100% -> #f3efe2  15.97:1   (already cream; needs none)
-       black   42% -> #8f8b82   5.34:1   (50% drops to 4.16 and fails)
-       bronze  76% -> #bc8f64   6.31:1
-     Black and Purple start darkest and so take the most cream. */
-  --trail-1: color-mix(in oklab, var(--tier-1) 68%, var(--color-cream));
-  --trail-2: color-mix(in oklab, var(--tier-2) 52%, var(--color-cream));
+       lane 1  54% -> #a294bf   5.47:1  (68% held at 3.93 once the brand
+                          went purple, which is darker than the old red)
+       lane 2  70% -> teal     11.40:1
+       lane 3  92% -> #e6ca83  11.52:1
+       lane 4 100% -> #f3efe2  15.97:1   (already cream; needs none)
+       lane 5  42% -> #8f8b82   5.34:1   (50% drops to 4.16 and fails)
+       lane 6  76% -> #bc8f64   6.31:1
+     The darkest lanes take the most cream. */
+  --trail-1: color-mix(in oklab, var(--tier-1) 54%, var(--color-cream));
+  --trail-2: color-mix(in oklab, var(--tier-2) 70%, var(--color-cream));
   --trail-3: color-mix(in oklab, var(--tier-3) 92%, var(--color-cream));
   --trail-4: color-mix(in oklab, var(--tier-4) 100%, var(--color-cream));
   --trail-5: color-mix(in oklab, var(--tier-5) 42%, var(--color-cream));

@@ -51,7 +51,7 @@ export default function LabBanner() {
   return (
     <div
       ref={ref}
-      className="fixed inset-x-0 top-0 z-[100] bg-accent text-white"
+      className="fixed inset-x-0 top-0 z-[100] bg-lab text-white"
     >
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-2 sm:px-8 sm:py-2.5">
         <p className="font-display uppercase leading-tight tracking-wide text-sm sm:text-lg lg:text-xl">
@@ -62,7 +62,7 @@ export default function LabBanner() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls={panelId}
-          className="shrink-0 rounded-none border border-white/70 px-2.5 py-1 font-label text-[11px] uppercase tracking-wider sm:text-xs hover:bg-white hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors"
+          className="shrink-0 rounded-none border border-white/70 px-2.5 py-1 font-label text-[11px] uppercase tracking-wider sm:text-xs hover:bg-white hover:text-lab focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors"
         >
           {open ? "Hide" : "What's different on this page?"}
         </button>
@@ -71,7 +71,7 @@ export default function LabBanner() {
       {open && (
         <div
           id={panelId}
-          className="border-t border-white/30 bg-accent"
+          className="border-t border-white/30 bg-lab"
         >
           <div className="mx-auto max-w-7xl px-4 py-3 sm:px-8">
             {/* Route-specific first. When there are none, say so outright —
