@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useId, useMemo, useState, useSyncExternalStore } from "react";
+import { useCallback, useId, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import GalleryLightbox from "./GalleryLightbox";
 import type { GalleryPhoto } from "@/lib/gallery";
 
 /** Shown before expanding: two full rows of four on desktop. */
@@ -21,7 +22,35 @@ function shuffled<T>(items: T[]): T[] {
 
 export default function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
   const [open, setOpen] = useState(false);
+  const [viewing, setViewing] = useState<number | null>(null);
   const gridId = useId();
+
+  // One ref per thumbnail: the overlay returns focus to the photo you were
+  // looking at when it closed, and asks which thumbnails are on screen so its
+  // arrow keys never land on one the collapsed grid is hiding.
+  const thumbs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  /** True only if the thumbnail is generating boxes — false when display:none. */
+  const onScreen = useCallback(
+    (i: number) => Boolean(thumbs.current[i]?.getClientRects().length),
+    []
+  );
+
+  /** The exact URL the grid rendered for a photo, cache and all. */
+  const poster = useCallback(
+    (i: number) => thumbs.current[i]?.querySelector("img")?.currentSrc || undefined,
+    []
+  );
+
+  const closeViewer = useCallback(() => {
+    setViewing((current) => {
+      // Scroll has already been restored by this point, so preventScroll is
+      // belt and braces: focus must not move the page the reader is back on.
+      const target = current === null ? null : thumbs.current[current];
+      target?.focus({ preventScroll: true });
+      return null;
+    });
+  }, []);
 
   /**
    * Natural order on the server and through hydration, so the client's first
@@ -67,16 +96,24 @@ export default function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
                 .filter(Boolean)
                 .join(" ")}
             >
-              <div className="relative aspect-[3/2] overflow-hidden bg-ink/10">
+              <button
+                type="button"
+                ref={(el) => {
+                  thumbs.current[i] = el;
+                }}
+                onClick={() => setViewing(i)}
+                aria-label={`View larger: ${photo.alt}`}
+                className="group relative block aspect-[3/2] w-full cursor-zoom-in overflow-hidden bg-ink/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              >
                 <Image
                   src={photo.src}
                   alt={photo.alt}
                   fill
                   loading="lazy"
                   sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                 />
-              </div>
+              </button>
             </li>
           );
         })}
@@ -94,6 +131,17 @@ export default function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
             {open ? "Show fewer" : `Show all ${photos.length} photos`}
           </button>
         </div>
+      )}
+
+      {viewing !== null && (
+        <GalleryLightbox
+          photos={order}
+          index={viewing}
+          onIndex={setViewing}
+          onClose={closeViewer}
+          canStepTo={onScreen}
+          poster={poster}
+        />
       )}
     </div>
   );

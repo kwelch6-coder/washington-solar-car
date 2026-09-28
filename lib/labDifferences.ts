@@ -36,6 +36,7 @@ export const labDifferences: Record<string, string[]> = {
   ],
   "/team": [
     "New photo gallery from the race season, in a different order each visit",
+    "Tapping a gallery photo opens it large over the page",
     "Placeholder grid showing where team headshots will go",
     "The Business subteam card now says its details are still being written",
   ],
