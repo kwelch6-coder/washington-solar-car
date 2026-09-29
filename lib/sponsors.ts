@@ -36,6 +36,17 @@ export type Sponsor = {
    * maintain.
    */
   treatment?: "filter" | "converted" | "original";
+  /**
+   * Emphasis multiplier on the row height, for a logo that should carry more
+   * weight than the rest. Default 1; every other logo stays at 1 so the wall
+   * still reads as even around the one that does not.
+   *
+   * Separate from `scale` on purpose. `scale` normalises optical size so marks
+   * of different proportions read as the same size — it is a correction, and
+   * folding emphasis into it would destroy that meaning. This multiplies the
+   * row the logo sits in, so the correction still applies inside it.
+   */
+  emphasis?: number;
 };
 
 /**
@@ -103,12 +114,27 @@ export const sponsors: Sponsor[] = [
   // Transparent background, so it is not a white-block case — but the mark is
   // an outline with an opaque white interior, and the filter closes its
   // counters into an unreadable blob. Verified by rendering both ways.
+  // Featured. The STF funds the team at a different level from the rest, so it
+  // gets a bigger cell.
+  //
+  // 1.35, not the 1.5-1.75 the target weight suggests, because the multiplier
+  // is not the weight. Measured off a rendered wall — bounding box of lit
+  // pixels, against the median of the other eleven — this mark already reads
+  // 1.18x their height at 1.0, so the multiplier compounds with that:
+  //
+  //   1.00 -> 203x58 ink, 1.18x median height
+  //   1.25 -> 254x74 ink, 1.51x
+  //   1.35 -> 273x79 ink, 1.61x   <- here, mid-band
+  //   1.50 -> 304x87 ink, 1.78x   <- over
+  //
+  // Tune by re-measuring, not by editing this number and hoping.
   {
     name: "Student Technology Fee",
     logo: "/sponsors/stf.png",
     url: "",
     scale: 0.654,
     treatment: "original",
+    emphasis: 1.35,
   },
   {
     name: "The Gill Corporation",

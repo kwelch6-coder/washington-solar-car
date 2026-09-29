@@ -5,20 +5,21 @@ import { TEAM_NAME, external, links } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Apply",
-  description: `Apply to join ${TEAM_NAME}. Separate applications for the Mechanical and Electrical subteams. No experience required.`,
+  description: `Apply to join ${TEAM_NAME}. Separate applications for the Mechanical, Electrical and Business subteams. No experience required.`,
 };
 
 type Path = {
   name: string;
   blurb: string;
-  href?: string;
+  href: string;
 };
 
 /**
- * One entry per subteam, in the same order as the Team page. Business has no
- * form yet; it keeps its slot so all three subteams are represented and the
- * card is ready to go live the moment a URL exists. No invented link, no
- * mailto stand-in.
+ * One entry per subteam, in the same order as the Team page. All three are
+ * open, so `href` is required and there is no second, de-emphasised card
+ * state — every card renders through the same branch and is styled
+ * identically. If a subteam ever closes again, bring back a variant here
+ * rather than dimming one card in place.
  */
 const PATHS: Path[] = [
   {
@@ -34,6 +35,7 @@ const PATHS: Path[] = [
   {
     name: "Business",
     blurb: "Sponsorship, outreach, and everything that keeps the team funded.",
+    href: links.applyBusiness,
   },
 ];
 
@@ -51,36 +53,21 @@ export default function ApplyPage() {
           <div className="grid sm:grid-cols-3 gap-4">
             {PATHS.map((path, i) => (
               <Reveal key={path.name} direction="up" delay={i * 0.08}>
-                {path.href ? (
-                  <a
-                    href={path.href}
-                    {...external}
-                    className="group flex h-full flex-col border-2 border-ink p-6 hover:bg-ink hover:text-cream transition-colors"
-                  >
-                    <h2 className="font-display text-2xl uppercase text-accent">
-                      {path.name}
-                    </h2>
-                    <p className="mt-2 text-ink/80 group-hover:text-cream/80">
-                      {path.blurb}
-                    </p>
-                    <span className="mt-6 font-label uppercase tracking-[0.14em] text-xs text-accent">
-                      Apply &rarr;
-                    </span>
-                  </a>
-                ) : (
-                  /* No form yet. Rendered as a non-interactive div rather than
-                     a disabled link so there is nothing to click, nothing to
-                     focus, and nothing announced as actionable. */
-                  <div className="flex h-full flex-col border-2 border-dashed border-ink/30 p-6 text-ink/45">
-                    <h2 className="font-display text-2xl uppercase text-accent/50">
-                      {path.name}
-                    </h2>
-                    <p className="mt-2">{path.blurb}</p>
-                    <span className="mt-6 font-label uppercase tracking-[0.14em] text-xs">
-                      Coming soon
-                    </span>
-                  </div>
-                )}
+                <a
+                  href={path.href}
+                  {...external}
+                  className="group flex h-full flex-col border-2 border-ink p-6 hover:bg-ink hover:text-cream transition-colors"
+                >
+                  <h2 className="font-display text-2xl uppercase text-accent group-hover:text-accent-light">
+                    {path.name}
+                  </h2>
+                  <p className="mt-2 text-ink/80 group-hover:text-cream/80">
+                    {path.blurb}
+                  </p>
+                  <span className="mt-6 font-label uppercase tracking-[0.14em] text-xs text-accent group-hover:text-accent-light">
+                    Apply &rarr;
+                  </span>
+                </a>
               </Reveal>
             ))}
           </div>

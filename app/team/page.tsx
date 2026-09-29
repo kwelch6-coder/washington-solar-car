@@ -181,7 +181,7 @@ export default function TeamPage() {
       <section className="bg-ink text-cream py-16 sm:py-24">
         <div className="mx-auto max-w-5xl px-5 sm:px-8 text-center">
           <Reveal>
-            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent-light mb-4">
               Where Our Alumni Go
             </h2>
           </Reveal>

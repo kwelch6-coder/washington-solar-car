@@ -55,10 +55,14 @@ export default function AboutPage() {
 
       <section className="bg-ink text-cream py-16 sm:py-24">
         <Reveal className="mx-auto max-w-3xl px-5 sm:px-8 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent-light mb-4">
             Why Solar
           </h2>
-          <p className="text-xl sm:text-2xl">{about.whySolar}</p>
+          {about.whySolar.map((paragraph, i) => (
+            <p key={i} className={`text-xl sm:text-2xl${i > 0 ? " mt-6" : ""}`}>
+              {paragraph}
+            </p>
+          ))}
         </Reveal>
       </section>
 
@@ -242,13 +246,13 @@ export default function AboutPage() {
       <section className="bg-ink text-cream py-16 sm:py-24">
         <div className="mx-auto max-w-5xl px-5 sm:px-8 grid sm:grid-cols-2 gap-10">
           <Reveal direction="left">
-            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent-light mb-4">
               The Race
             </h2>
             <p className="text-cream/85">{race.americanSolarChallenge}</p>
           </Reveal>
           <Reveal direction="right">
-            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent-light mb-4">
               The Qualifier
             </h2>
             <p className="text-cream/85">{race.formulaSunGrandPrix}</p>

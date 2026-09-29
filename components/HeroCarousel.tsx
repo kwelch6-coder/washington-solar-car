@@ -176,12 +176,12 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
               <Link
                 href={slide.ctaHref}
                 tabIndex={active ? 0 : -1}
-                className="group inline-flex items-center gap-2 font-sans font-medium text-sm sm:text-base text-cream hover:text-accent transition-colors"
+                className="group inline-flex items-center gap-2 font-sans font-medium text-sm sm:text-base text-cream hover:text-accent-light transition-colors"
               >
                 {/* Underline lives on the label only. A parent's text-decoration
                     propagates to descendants and can't be switched off by the
                     child, so it has to start below the arrow, not be undone. */}
-                <span className="underline decoration-2 decoration-accent underline-offset-8">
+                <span className="underline decoration-2 decoration-accent-light underline-offset-8">
                   {slide.ctaLabel}
                 </span>
                 <span
@@ -222,7 +222,7 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
             aria-label={`Go to slide ${i + 1}`}
             aria-current={i === index}
             className={`h-2.5 rounded-full transition-all ${
-              i === index ? "w-7 bg-accent" : "w-2.5 bg-cream/50 hover:bg-cream/80"
+              i === index ? "w-7 bg-accent-light" : "w-2.5 bg-cream/50 hover:bg-cream/80"
             }`}
           />
         ))}

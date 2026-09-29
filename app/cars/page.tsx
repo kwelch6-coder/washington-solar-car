@@ -67,7 +67,7 @@ export default function CarsPage() {
       <section className="bg-ink text-cream py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal>
-            <h2 className="font-display text-3xl sm:text-5xl uppercase text-accent mb-4">
+            <h2 className="font-display text-3xl sm:text-5xl uppercase text-accent-light mb-4">
               How It Gets Built
             </h2>
             <p className="text-xl sm:text-2xl max-w-3xl">{build.headline}</p>
@@ -107,7 +107,7 @@ export default function CarsPage() {
           <div className="mt-14 grid sm:grid-cols-3 gap-10">
             {SOURCING.map((column, i) => (
               <Reveal key={column.title} direction="up" delay={i * 0.08}>
-                <h3 className="font-label uppercase tracking-[0.2em] text-xs text-accent mb-4">
+                <h3 className="font-label uppercase tracking-[0.2em] text-xs text-accent-light mb-4">
                   {column.title}
                 </h3>
                 <ul className="space-y-2 text-cream/85">
@@ -125,13 +125,13 @@ export default function CarsPage() {
             <p className="mt-12 max-w-3xl text-cream/85">{build.boards}</p>
             <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4 font-label font-light text-sm text-cream/60">
               <span>
-                <span className="uppercase tracking-widest text-xs text-accent mr-2">
+                <span className="uppercase tracking-widest text-xs text-accent-light mr-2">
                   Software
                 </span>
                 {build.software.join(", ")}
               </span>
               <span>
-                <span className="uppercase tracking-widest text-xs text-accent mr-2">
+                <span className="uppercase tracking-widest text-xs text-accent-light mr-2">
                   Facilities
                 </span>
                 {build.facilities.join(", ")}

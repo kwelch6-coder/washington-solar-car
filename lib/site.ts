@@ -22,8 +22,8 @@ export const TAGLINE = `${TEAM_NAME} turns sun into speed, and students into lea
  *
  * The single all-subteams application form that used to live here is gone:
  * applying is now per-subteam, and every Join the Team call to action points
- * at the internal APPLY_PATH page instead, which is where these two forms are
- * offered. Business has no form yet — see `subTeams` in lib/data.ts.
+ * at the internal APPLY_PATH page instead, which is where all three forms are
+ * offered. All three subteams are open.
  */
 export const links = {
   instagram: "https://www.instagram.com/solarvehicleteamuw/",
@@ -35,6 +35,8 @@ export const links = {
     "https://docs.google.com/forms/d/e/1FAIpQLSfsKaRukCikBrVyzfyoqAhPPVOX5_9A22e8znTZsHQTLaHAGw/viewform",
   applyElectrical:
     "https://docs.google.com/forms/d/e/1FAIpQLSecw4pRc5Wo8qW7J2uXjCOhWAibaRlqh96-dxAe86HpLJdnvQ/viewform",
+  applyBusiness:
+    "https://docs.google.com/forms/d/e/1FAIpQLSfiNwYUODLJagyyC4xqqiljshIWtXPYKwax5Sultt5xKoDpDQ/viewform",
   /**
    * The lab sandbox. An absolute URL to the lab branch deployment, not a
    * relative /lab path: the lab routes live only on that branch, so a relative
