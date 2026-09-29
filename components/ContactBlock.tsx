@@ -38,7 +38,7 @@ export default function ContactBlock() {
           </a>
         </div>
 
-        <div className="mt-10 font-label uppercase tracking-[0.16em] text-sm text-accent">
+        <div className="mt-10 font-label uppercase tracking-[0.16em] text-sm text-accent-light">
           {contact.location}
         </div>
         <p className="mt-2 text-cream/60 text-sm">{contact.eventLine}</p>

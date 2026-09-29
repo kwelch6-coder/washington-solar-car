@@ -8,6 +8,26 @@
      Note: UW restructured its palette — this is now the SECONDARY purple; the
      dominant brand colour is Husky Purple #32006e. Both are official. */
   --color-accent: #4b2e83;
+  /*
+   * Lightened purple, for purple that sits on the near-black.
+   *
+   * The brand purple is 9.05:1 on the cream and 1.76:1 on --color-ink, so on a
+   * dark ground it fails even the 3:1 allowed for large text. This is the
+   * variant for that case: 4.99:1 on --color-ink.
+   *
+   * It is NOT a white mix. Mixing --color-accent toward white far enough to
+   * clear 4.5:1 on ink strips 43% of its chroma and lands on a grey lavender
+   * that no longer reads as the brand. This is lightened at near-constant
+   * chroma instead — 97% of the brand purple's, at the same hue — so it reads
+   * as the same colour, lighter.
+   *
+   * Use it for purple ON DARK: text, thin rules, underlines, borders and icons.
+   * Do NOT use it on the cream. There is no single lightened purple that
+   * clears 4.5:1 on both grounds — the bands do not overlap — and on cream the
+   * brand purple is already at 9.05:1, so lightening there only costs
+   * contrast. Large purple fills keep --color-accent everywhere.
+   */
+  --color-accent-light: #9575cd;
   /* The lab banner only. Deliberately NOT the brand colour: its whole job is
      to look like it does not belong to the design. It must not follow
      --color-accent, or it starts reading as a design element. */
@@ -18,6 +38,7 @@
   --color-cream: var(--color-cream);
   --color-ink: var(--color-ink);
   --color-accent: var(--color-accent);
+  --color-accent-light: var(--color-accent-light);
   --color-lab: var(--color-lab);
   --font-display: var(--font-anton);
   --font-sans: var(--font-inter);

@@ -104,8 +104,17 @@ export const timeline: TimelineEntry[] = [
 export const about = {
   mission: `${TEAM_NAME} exists because we believe students grow most when working alongside others toward something bigger than themselves. That belief takes shape through the demanding work of designing, building, testing, and preparing a solar car to race against teams from around the world. Along the way, members discover what it means to lead, to trust teammates, and to push through hard problems together, lessons that shape who they become long after graduation. Every race is a reminder that the work matters, that sustainable transportation is worth fighting for, and that real change starts when people commit to building something together.`,
 
-  whySolar:
-    "Solar is the only energy source that never runs out. As long as the sun is up, our car can make its own power. The first solar cars are right on the edge of hitting real roads, and what's standing between that idea and everyday driving is efficiency, more power, speed, and range from the same sunlight. That's the exact problem this team works on with every car we build.",
+  /**
+   * Two paragraphs, so this is an array and the renderer maps it.
+   *
+   * Leads with what a student gets out of building the car. The previous copy
+   * led with solar cars reaching commercial roads, which is an argument about
+   * the technology rather than about the education.
+   */
+  whySolar: [
+    "Solar is the hardest version of the problem. A car that makes its own power has no margin for a lazy design decision, so every choice a student makes here gets tested against physics and then against a thousand miles of highway.",
+    "That is the point. Students on this team design real parts, machine them, wire them, and then watch them either hold up or fail in front of everyone. Few places in an undergraduate education give you a deadline that a competition sets and a result you cannot argue with. The sun is what makes the problem honest.",
+  ],
 
   whatMakesUsDifferent: `Founded just three years ago, few people were willing to buy into an unproven dream. ${TEAM_NAME} built its first car in an eleven month design cycle, less than half the typical two years most teams take. That team earned Rookie of the Year, then followed it up the next year by placing as the top American team in their first cross-country endurance race. When the car needed a trailer to haul it cross-country, or funding fell short, the community stepped up every time, and that community is the real strength behind everywhere this team has gone.`,
 
@@ -224,13 +233,17 @@ export const subTeams: SubTeam[] = [
       },
     ],
   },
-  // No project list supplied for Business yet, so the card does not expand.
-  // The description exists only to say so — beside two cards that open into
-  // full project lists, a bare name plate reads as broken rather than pending.
-  // Do not invent project descriptions here.
+  // No project list supplied for Business yet, so this card still does not
+  // expand. It does need a description though: beside two cards that open into
+  // full project lists, a bare name plate reads as broken. This is the
+  // subteam's own blurb from the apply page rather than anything invented, and
+  // it says what Business does instead of announcing that the card is
+  // unfinished — the application is live, so nothing here should imply the
+  // subteam is not taking people.
   {
     name: "Business",
-    description: "Project details for this subteam are still being written.",
+    description:
+      "Sponsorship, outreach, and everything that keeps the team funded.",
   },
 ];
 
@@ -644,7 +657,21 @@ export const race = {
 export const sponsors = {
   whyPartner:
     "Your logo travels the length of the country on a car built by the students you want to hire. In 2026 that was 1,749.4 official race miles from Minneapolis to Amarillo, finishing 4th in the SOV class and top American team in it.",
-  currentBenefit: "Sponsors currently receive a sticker on the car.",
+  /**
+   * What partnering includes. Deliberately NOT attached to dollar tiers: the
+   * tier structure is not finalized, so these read as what every partner gets.
+   *
+   * This replaces the old single line, which said sponsors receive a sticker on
+   * the car. That was the placeholder answer to the same question and it now
+   * contradicts the first item below, so it is gone rather than kept beside it.
+   */
+  benefits: [
+    "Your logo on the car",
+    "Direct access to hire from the team",
+    "Your logo on team merchandise",
+    "Your logo on this site",
+    "A feature post on our Instagram",
+  ],
   needMost:
     "What helps most right now is straightforward: money, and donated materials.",
   bestStory:
@@ -652,6 +679,15 @@ export const sponsors = {
 };
 
 export const contact = {
-  location: "The 8 Makerspace, McMahon Hall, University of Washington",
+  /*
+   * The team has moved out of The 8 makerspace in McMahon Hall.
+   *
+   * TODO: add the full street address for the MEB Annex. Building and campus
+   * only for now — street number, street, city, state and ZIP are still needed
+   * and are deliberately NOT guessed here. Anything that needs a mailable
+   * address (shipping for donated materials, an invoice footer, structured
+   * data) is blocked on this.
+   */
+  location: "MEB Annex, University of Washington",
   eventLine: "Want the car at your event? Reach out below.",
 };

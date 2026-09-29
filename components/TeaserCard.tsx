@@ -32,7 +32,7 @@ export default function TeaserCard({
           {title}
         </h3>
         <p className="mt-1 text-cream/75 text-sm">{description}</p>
-        <span className="mt-3 inline-block font-label text-accent text-sm uppercase tracking-wide group-hover:translate-x-1 transition-transform">
+        <span className="mt-3 inline-block font-label text-accent-light text-sm uppercase tracking-wide group-hover:translate-x-1 transition-transform">
           Explore &rarr;
         </span>
       </div>

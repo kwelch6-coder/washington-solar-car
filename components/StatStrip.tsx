@@ -13,7 +13,7 @@ export default function StatStrip({
               i === 0 ? "sm:border-l-0" : ""
             }`}
           >
-            <div className="font-display text-4xl sm:text-5xl text-accent tabular-nums">
+            <div className="font-display text-4xl sm:text-5xl text-accent-light tabular-nums">
               {item.value}
             </div>
             <div className="mt-1 font-label font-light text-xs sm:text-sm uppercase tracking-widest text-cream/70">

@@ -13,7 +13,7 @@ export default function StatBand({
     <div className="space-y-12">
       {groups.map((g) => (
         <div key={g.group}>
-          <h3 className="font-label font-light text-xs uppercase tracking-[0.3em] text-accent mb-6">
+          <h3 className="font-label font-light text-xs uppercase tracking-[0.3em] text-accent-light mb-6">
             {g.group}
           </h3>
           {/* Values are set with tabular figures so the columns line up even

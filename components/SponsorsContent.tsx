@@ -33,7 +33,20 @@ export default function SponsorsContent({
               Why Partner With Us
             </h2>
             <p className="text-lg text-ink/85">{sponsors.whyPartner}</p>
-            <p className="mt-4 text-ink/70">{sponsors.currentBenefit}</p>
+            {/* A list, not prose: sponsors scan this section rather than read
+                it, and the prose above already makes the argument. No dollar
+                figures and no tier labels — the tier structure is not settled,
+                so these are what partnering includes generally. */}
+            <ul className="mt-6 space-y-2">
+              {sponsors.benefits.map((benefit) => (
+                <li
+                  key={benefit}
+                  className="flex gap-3 border-l-2 border-accent pl-4 text-ink/85"
+                >
+                  {benefit}
+                </li>
+              ))}
+            </ul>
           </Reveal>
           <Reveal direction="right">
             <div className="relative aspect-[3/2]">

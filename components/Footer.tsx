@@ -28,13 +28,13 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="font-label uppercase tracking-[0.2em] text-xs text-accent mb-3">
+          <h2 className="font-label uppercase tracking-[0.2em] text-xs text-accent-light mb-3">
             Site
           </h2>
           <ul className="space-y-2">
             {LINKS.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-accent transition-colors">
+                <Link href={link.href} className="hover:text-accent-light transition-colors">
                   {link.label}
                 </Link>
               </li>
@@ -43,13 +43,13 @@ export default function Footer() {
         </div>
 
         <div id="contact-footer">
-          <h2 className="font-label uppercase tracking-[0.2em] text-xs text-accent mb-3">
+          <h2 className="font-label uppercase tracking-[0.2em] text-xs text-accent-light mb-3">
             Reach Us
           </h2>
           {/* Address shown in full rather than behind an "Email us" label, so
               it can be copied when no mail client is configured. */}
           <p className="mb-2">
-            <a href={`mailto:${links.email}`} className="hover:text-accent transition-colors">
+            <a href={`mailto:${links.email}`} className="hover:text-accent-light transition-colors">
               {links.email}
             </a>
           </p>
@@ -60,7 +60,7 @@ export default function Footer() {
             <a
               href={links.instagram}
               {...external}
-              className="hover:text-accent transition-colors"
+              className="hover:text-accent-light transition-colors"
             >
               Instagram
             </a>
@@ -69,13 +69,15 @@ export default function Footer() {
             <a
               href={links.linkedin}
               {...external}
-              className="hover:text-accent transition-colors"
+              className="hover:text-accent-light transition-colors"
             >
               LinkedIn
             </a>
           </p>
           <p className="text-cream/70 text-sm">
-            The 8 Makerspace, McMahon Hall
+            {/* TODO: street address still needed — see `contact.location` in
+                lib/data.ts. Building and campus only until then. */}
+            MEB Annex
             <br />
             {UNIVERSITY}, Seattle
           </p>
