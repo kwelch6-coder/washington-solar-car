@@ -9,7 +9,6 @@ import SpotlightCard from "@/components/SpotlightCard";
 import {
   alumniEmployers,
   joining,
-  leadership,
   spotlightCards,
   subTeams,
 } from "@/lib/data";
@@ -125,53 +124,17 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <section className="bg-cream pb-16 sm:pb-24">
-        <div className="mx-auto max-w-3xl px-5 sm:px-8">
-          <Reveal>
-            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent text-center mb-10">
-              Leadership
-            </h2>
-          </Reveal>
-          <Reveal>
-            <ul className="divide-y-2 divide-ink border-y-2 border-ink">
-              {leadership.map((person) => (
-                <li
-                  key={person.role}
-                  className="flex flex-wrap items-baseline justify-between gap-2 py-4"
-                >
-                  <span
-                    className={`font-display text-xl sm:text-2xl uppercase ${
-                      person.tbd ? "text-ink/40" : "text-ink"
-                    }`}
-                  >
-                    {person.tbd ? (
-                      <span className="border border-dashed border-ink/40 px-2 py-0.5">
-                        TBD
-                      </span>
-                    ) : (
-                      person.name
-                    )}
-                  </span>
-                  <span className="text-ink/70">{person.role}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 text-ink/60 text-sm text-center">
-              Leads serve one-year terms.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      {/* The leadership listing that used to sit here is gone: the names in it
+          were wrong. It can come back as a marked subset of `members` rather
+          than a second hand-kept list of people — one roster, one place to fix
+          a name. */}
 
       <section className="bg-cream pb-16 sm:pb-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal>
-            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent text-center mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl uppercase text-accent text-center mb-12">
               The Whole Team
             </h2>
-            <p className="text-center text-ink/60 mb-12">
-              Photos are still being taken. Every slot below is a placeholder.
-            </p>
           </Reveal>
           <Reveal>
             <MemberGrid members={members} />

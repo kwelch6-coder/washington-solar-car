@@ -56,3 +56,9 @@ next-env.d.ts
 # Sponsor logo originals: source media, same convention as edited_photos/.
 # The served, white-treatable copies live in public/sponsors/ and ARE committed.
 /Sponsor logos
+
+# Team headshot originals: source media, same convention as edited_photos/.
+# ~160MB of 2-11MB squares. The 600x600 copies the roster actually serves live
+# in public/members/ and ARE committed. Regenerate them with
+# `node scripts/optimize-headshots.mjs`.
+/headshots

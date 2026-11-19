@@ -37,7 +37,9 @@ export const labDifferences: Record<string, string[]> = {
   "/team": [
     "New photo gallery from the race season, in a different order each visit",
     "Tapping a gallery photo opens it large over the page",
-    "Placeholder grid showing where team headshots will go",
+    "The real team headshots are in, 59 of them, replacing the empty placeholder grid",
+    "Twelve of those photos have no name under them yet — the space is left blank on purpose rather than guessed at",
+    "The Leadership listing is gone: the names on it were wrong",
     "The Business subteam card now says its details are still being written",
   ],
 };

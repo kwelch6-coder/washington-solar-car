@@ -316,23 +316,14 @@ export const alumniEmployers = [
   "Puris Proteins",
 ];
 
-export type LeadershipMember = {
-  name: string;
-  role: string;
-  tbd?: boolean;
-};
-
-/**
- * There is no faculty advisor at present, so there is no advisor row. Do not
- * reinstate one without a name from leadership.
+/*
+ * The `leadership` list and its `LeadershipMember` type were removed: the five
+ * names in it were wrong, and a hand-kept second list of people is where that
+ * kind of error survives a roster update. The roster in lib/members.ts is now
+ * the only place a person's name is written down. If the leadership listing is
+ * wanted again, mark the relevant entries there and filter — don't reintroduce
+ * a parallel list.
  */
-export const leadership: LeadershipMember[] = [
-  { name: "Hailin Truman", role: "Founder & President" },
-  { name: "Grant Gallagher", role: "Mechanical Lead" },
-  { name: "Nikhil Garg", role: "Electrical Lead" },
-  { name: "Owen Kuwayti", role: "Battery Lead & Admin Lead" },
-  { name: "Izzy Lavoie", role: "Business Lead" },
-];
 
 export const cars = {
   sakura: {
